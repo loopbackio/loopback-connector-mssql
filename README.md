@@ -5,11 +5,27 @@ MsSQL adapter for the jugglingdb ORM
 
 Early stages, not fully tested.
 
+Usage
+---
+To use it you need jugglingdb@0.2.x and msnodesql
+
+1. Setup dependencies in package.json
+    {
+      ...
+      "dependencies":{
+      	"msnodesql":"~0.2.1",
+        "jugglingdb": "~0.2.0",
+        "jugglingdb-mssql":"latest"
+      }
+      ...
+    }
+2.  Use:
+    var Schema = require("jugglingdb").Schema;
+    var schema = new Schema("mssql", {host:"YourSqlServer", database:"YourDatabase"});
+    ...
 
 MIT License
 ---
-Copyright (C) 2013 by Scott Vickers
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
