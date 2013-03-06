@@ -4,7 +4,7 @@ jugglingdb-mssql
 MsSQL adapter for the jugglingdb ORM
 
 
-MIT
+MIT License
 ---
 Copyright (C) 2013 by Scott Vickers
 
