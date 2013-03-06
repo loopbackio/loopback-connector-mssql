@@ -7,9 +7,10 @@ Early stages, not fully tested.
 
 Usage
 ---
-To use it you need jugglingdb@0.2.x and msnodesql
+To use it you need <pre><code>jugglingdb@0.2.x</code></pre> and msnodesql
 
 1. Setup dependencies in package.json
+		<pre><code>
     {
       ...
       "dependencies":{
@@ -19,10 +20,13 @@ To use it you need jugglingdb@0.2.x and msnodesql
       }
       ...
     }
+  	</code></pre>
 2.  Use:
+		<pre><code>
     var Schema = require("jugglingdb").Schema;
     var schema = new Schema("mssql", {host:"YourSqlServer", database:"YourDatabase"});
     ...
+    </code></pre>
 
 MIT License
 ---
