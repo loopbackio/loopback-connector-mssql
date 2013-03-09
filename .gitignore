@@ -13,5 +13,6 @@ results
 
 *.sublime*
 node_modules/
+db/
 
 npm-debug.log

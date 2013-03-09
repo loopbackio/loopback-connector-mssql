@@ -1,12 +1,15 @@
 {
   "name": "jugglingdb-mssql",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "MsSQL adapter for JugglingDB",
   "main": "index.js",
   "dependencies": {
-    "jugglingdb": "latest",
+    "jugglingdb": "~0.2.0-22",
     "util":"~0.4.9",
     "msnodesql":"~0.2.1"
+  },
+  "devDependencies": {
+    "nodeunit":"~0.7.4"
   },
   "repository": {
     "type": "git",
