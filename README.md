@@ -3,7 +3,7 @@ jugglingdb-mssql
 
 MsSQL adapter for the jugglingdb ORM
 
-Early stages, not fully tested.
+Now passing all tests exposed by the jugglingdb framework!
 
 Usage
 ---
