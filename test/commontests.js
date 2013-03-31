@@ -156,11 +156,43 @@ commonTest.it('should be able to ORDER results', function(test) {
   }
 });
 
-commonTest.it('should be able count', function(test) {
+commonTest.it("should count posts", function(test) {
   test.expect(2);
-  schema.models.Post.count({title:'Title A'}, function(err, cnt) {
+  schema.models.Post.count({title:"Title A"}, function(err, cnt) {
     test.ifError(err);
     test.equal(cnt, 2);
     test.done();
+  });
+});
+
+commonTest.it("should delete a post", function(test) {
+  schema.models.Post.all({
+    where:{
+      "title":"Title Z"
+    }
+  }, function(err, posts) {
+    test.ifError(err);
+    test.equal(posts.length, 1);
+    id = posts[0].id;
+    posts[0].destroy(function(err) {
+      test.ifError(err);
+      schema.models.Post.find(id, function(err, post) {
+        test.ifError(err);
+        test.equal(post, null);
+        test.done();
+      });
+    });
+  });
+});
+
+commonTest.it("should delete all posts", function(test) {
+  test.expect(3);
+  schema.models.Post.destroyAll(function(err) {
+    test.ifError(err);
+    schema.models.Post.count(function(err, cnt){
+      test.ifError(err);
+      test.equal(cnt, 0);
+      test.done();
+    });
   });
 });
