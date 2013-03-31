@@ -155,3 +155,12 @@ commonTest.it('should be able to ORDER results', function(test) {
     return a - b;
   }
 });
+
+commonTest.it('should be able count', function(test) {
+  test.expect(2);
+  schema.models.Post.count({title:'Title A'}, function(err, cnt) {
+    test.ifError(err);
+    test.equal(cnt, 2);
+    test.done();
+  });
+});
