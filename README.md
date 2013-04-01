@@ -9,24 +9,56 @@ Usage
 ---
 To use it you need <pre><code>jugglingdb@0.2.x</code></pre> and msnodesql
 
-1. Setup dependencies in package.json
-		<pre><code>
+1. Setup dependencies in package.json:
+  <pre>
+    <code>
     {
       ...
       "dependencies":{
-      	"msnodesql":"~0.2.1",
+        "msnodesql":"~0.2.1",
         "jugglingdb": "~0.2.0",
         "jugglingdb-mssql":"latest"
       }
       ...
     }
-  	</code></pre>
-2.  Use:
-		<pre><code>
+    </code>
+  </pre>
+2. Use:
+  <pre>
+    <code>
     var Schema = require("jugglingdb").Schema;
     var schema = new Schema("mssql", {host:"YourSqlServer", database:"YourDatabase"});
     ...
-    </code></pre>
+    </code>
+  </pre>
+3. Primary Keys:
+  using anything other than the default 'id' as the primary key
+  will cause the hasMany and belongsTo relationships in jugglingdb to
+  not work, and possibly other oddities as well (so you probably
+  shouldn't use it until it's officially supported).
+
+  to specify a custom primary key name for a model use
+  <pre>
+    <code>
+      var AppliesTo = schema.define("AppliesTo", {
+        AppliesToID: {
+          type:Number,
+          primaryKey:true
+        },
+        Title: {
+          type:String,
+          limit:100
+        },
+        Identifier: {
+          type:String,
+          limit:100
+        },
+        Editable: {
+          type:Number
+        }
+      });
+    </code>
+  </pre>
 
 MIT License
 ---

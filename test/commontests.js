@@ -196,3 +196,36 @@ commonTest.it("should delete all posts", function(test) {
     });
   });
 });
+
+//custom primary keys not quite working :(, hopefully 1602 will implement that functionality in jugglingdb soon.
+commonTest.it("should support custom primary key", function(test) {
+  test.expect(3);
+  var AppliesTo = schema.define("AppliesTo", {
+    AppliesToID: {
+      type:Number,
+      primaryKey:true
+    },
+    Title: {
+      type:String,
+      limit:100
+    },
+    Identifier: {
+      type:String,
+      limit:100
+    },
+    Editable: {
+      type:Number
+    }
+  });
+
+  schema.automigrate(function (err) {
+    test.ifError(err);
+
+    AppliesTo.create({Title:"custom key", Identifier:"ck", Editable:false}, function(err, data) {
+      test.ifError(err);
+      test.notStrictEqual(typeof data.AppliesToID, 'undefined');
+      test.done();
+    });
+  });
+
+});
