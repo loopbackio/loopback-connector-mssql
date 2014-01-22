@@ -1,20 +1,21 @@
 {
-  "name": "jugglingdb-mssql",
-  "version": "0.1.5",
-  "description": "MsSQL adapter for JugglingDB",
+  "name": "loopback-connector-mssql",
+  "version": "1.0.0",
+  "description": "MsSQL connector for LoopBack",
   "main": "index.js",
   "dependencies": {
-    "jugglingdb": "~0.2.0-22",
-    "util":"~0.4.9",
+    "util": "~0.10.2",
     "msnodesql":"~0.2.1"
   },
+  "peerDependencies": {
+    "loopback-datasource-juggler":"1.2.x"
+  },
   "devDependencies": {
-    "nodeunit":"~0.7.4"
+    "nodeunit": "~0.8.2"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/code-vicar/jugglingdb-mssql.git"
+    "url": "https://github.com/strongloop/loopback-connector-mssql.git"
   },
-  "author": "Scott Vickers",
   "license": "MIT"
 }
