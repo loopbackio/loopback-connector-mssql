@@ -1,11 +1,9 @@
-var jdb = require('jugglingdb'),
-    Schema = jdb.Schema,
-    commonTest = jdb.test,
-    db = require("../db/dbconfig");
+var jdb = require('loopback-datasource-juggler'),
+    commonTest = jdb.test;
 
-var adapter = require("../");
-var schemaSettings = { host:db.server, database:db.db, username:db.user, password:db.pwd };
-var schema = new Schema(adapter, schemaSettings);
+require('./init');
+
+var schema = getSchema();
 
 //run the tests exposed by jugglingdb
 commonTest(module.exports, schema);
