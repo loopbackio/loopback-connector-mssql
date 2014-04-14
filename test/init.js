@@ -10,7 +10,8 @@ try {
     user: 'demo',
     password: 'L00pBack',
     host: 'localhost',
-    database: 'demo'
+    database: 'demo',
+    supportsOffSetFetch: Math.random() > 0.5
   };
 }
 
@@ -21,8 +22,7 @@ global.getConfig = function (options) {
     port: config.port || 1433,
     database: config.database || 'test',
     user: config.user || config.username,
-    password: config.password,
-    createDatabase: true
+    password: config.password
   };
 
   if (options) {
