@@ -1,81 +1,172 @@
-jugglingdb-mssql
-================
+## loopback-connector-mssql
 
-MsSQL adapter for the jugglingdb ORM
+The Microsoft SQL Server (MSSQL) Connector module for for [loopback-datasource-juggler](http://docs.strongloop.com/loopback-datasource-juggler/).
 
-Now passing all tests exposed by the jugglingdb framework!
 
-Usage
----
-To use it you need <pre><code>jugglingdb@0.2.x</code></pre> and msnodesql
+## Connector settings
 
-1. Setup dependencies in package.json:
-  <pre>
-    <code>
+The connector can be configured using the following settings from the data source.
+
+* host or hostname (default to 'localhost'): The host name or ip address of the Microsoft SQL Server
+* port (default to 1433): The port number of the Microsoft SQL Server
+* username or user: The user name to connect to the Microsoft SQL Server
+* password: The password
+* database: The Microsoft SQL Server database name
+* schema: The database schema, default to 'dbo'
+
+**NOTE**: By default, the 'dbo' schema is used for all tables.
+
+The MSSQL connector uses [node-mssql](https://github.com/patriksimek/node-mssql) as the driver. See more
+information about configuration parameters, check [https://github.com/patriksimek/node-mssql#configuration-1](https://github.com/patriksimek/node-mssql#configuration-1).
+
+**NOTE**: The connector can also be configured using a single 'url' property,
+for example:
+```json
     {
-      ...
-      "dependencies":{
-        "msnodesql":"~0.2.1",
-        "jugglingdb": "~0.2.0",
-        "jugglingdb-mssql":"latest"
-      }
-      ...
+        "url": "mssql://test:mypassword@localhost:1433/demo?schema=dbo"
     }
-    </code>
-  </pre>
-2. Use:
-  <pre>
-    <code>
-    var Schema = require("jugglingdb").Schema;
-    var schema = new Schema("mssql", {host:"YourSqlServer", database:"YourDatabase"});
-    ...
-    </code>
-  </pre>
-3. Primary Keys:
-  using anything other than the default 'id' as the primary key
-  will cause the hasMany and belongsTo relationships in jugglingdb to
-  not work, and possibly other oddities as well (so you probably
-  shouldn't use it until it's officially supported).
+```
 
-  to specify a custom primary key name for a model use
-  <pre>
-    <code>
-      var AppliesTo = schema.define("AppliesTo", {
-        AppliesToID: {
-          type:Number,
-          primaryKey:true
-        },
-        Title: {
-          type:String,
-          limit:100
-        },
-        Identifier: {
-          type:String,
-          limit:100
-        },
-        Editable: {
-          type:Number
+## Discovering Models
+
+Microsoft SQL Server data sources allow you to discover model definition information from existing mssql databases. See the following APIs:
+
+ - [dataSource.discoverModelDefinitions([username], fn)](https://github.com/strongloop/loopback#datasourcediscovermodeldefinitionsusername-fn)
+ - [dataSource.discoverSchema([owner], name, fn)](https://github.com/strongloop/loopback#datasourcediscoverschemaowner-name-fn)
+
+
+## Model definition for Microsoft SQL Server
+
+The model definition consists of the following properties:
+
+* name: Name of the model, by default, it's the camel case of the table
+* options: Model level operations and mapping to Microsoft SQL Server schema/table
+* properties: Property definitions, including mapping to Microsoft SQL Server columns
+
+```json
+
+    {"name": "Inventory", "options": {
+      "idInjection": false,
+      "mssql": {
+        "schema": "strongloop",
+        "table": "inventory"
+      }
+    }, "properties": {
+      "id": {
+        "type": "String",
+        "required": false,
+        "length": 64,
+        "precision": null,
+        "scale": null,
+        "mssql": {
+          "columnName": "id",
+          "dataType": "character varying",
+          "dataLength": 64,
+          "dataPrecision": null,
+          "dataScale": null,
+          "nullable": "NO"
         }
-      });
-    </code>
-  </pre>
+      },
+      "productId": {
+        "type": "String",
+        "required": false,
+        "length": 20,
+        "precision": null,
+        "scale": null,
+        "id": 1,
+        "mssql": {
+          "columnName": "product_id",
+          "dataType": "character varying",
+          "dataLength": 20,
+          "dataPrecision": null,
+          "dataScale": null,
+          "nullable": "YES"
+        }
+      },
+      "locationId": {
+        "type": "String",
+        "required": false,
+        "length": 20,
+        "precision": null,
+        "scale": null,
+        "id": 1,
+        "mssql": {
+          "columnName": "location_id",
+          "dataType": "character varying",
+          "dataLength": 20,
+          "dataPrecision": null,
+          "dataScale": null,
+          "nullable": "YES"
+        }
+      },
+      "available": {
+        "type": "Number",
+        "required": false,
+        "length": null,
+        "precision": 32,
+        "scale": 0,
+        "mssql": {
+          "columnName": "available",
+          "dataType": "integer",
+          "dataLength": null,
+          "dataPrecision": 32,
+          "dataScale": 0,
+          "nullable": "YES"
+        }
+      },
+      "total": {
+        "type": "Number",
+        "required": false,
+        "length": null,
+        "precision": 32,
+        "scale": 0,
+        "mssql": {
+          "columnName": "total",
+          "dataType": "integer",
+          "dataLength": null,
+          "dataPrecision": 32,
+          "dataScale": 0,
+          "nullable": "YES"
+        }
+      }
+    }}
 
-MIT License
----
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+```
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+## Type Mapping
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+ - Number
+ - Boolean
+ - String
+ - Object
+ - Date
+ - Array
+ - Buffer
+
+### JSON to Microsoft SQL Server Types
+
+
+### Microsoft SQL Server Types to JSON
+
+
+## Destroying Models
+
+Destroying models may result in errors due to foreign key integrity. Make sure
+to delete any related models first before calling delete on model's with
+relationships.
+
+## Auto Migrate / Auto Update
+
+After making changes to your model properties you must call `Model.automigrate()`
+or `Model.autoupdate()`. Only call `Model.automigrate()` on new models
+as it will drop existing tables.
+
+LoopBack MSSQL connector creates the following schema objects for a given
+model:
+
+* A table, for example, PRODUCT under the 'dbo' schema within the database
+
+
+## Running tests
+
+    npm test
