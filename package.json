@@ -15,7 +15,8 @@
   "devDependencies": {
     "loopback-datasource-juggler": "1.x",
     "mocha": "~1.18.2",
-    "should": "~1.2.2"
+    "should": "~1.2.2",
+    "rc": "~0.3.5"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha --timeout 5000 -R spec"
