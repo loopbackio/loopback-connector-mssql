@@ -2,9 +2,17 @@
   "name": "loopback-connector-mssql",
   "version": "1.0.0",
   "description": "Microsoft SQL Server connector for LoopBack",
+  "keywords": [
+    "StrongLoop",
+    "LoopBack",
+    "Microsoft SQL Server",
+    "MSSQL",
+    "Database",
+    "DataSource",
+    "Connector"
+  ],
   "main": "index.js",
   "dependencies": {
-    "util": "~0.10.3",
     "mssql": "~0.5.3",
     "debug": "~0.8.0",
     "async": "~0.7.0"
