@@ -60,7 +60,7 @@ The model definition consists of the following properties:
         "scale": null,
         "mssql": {
           "columnName": "id",
-          "dataType": "character varying",
+          "dataType": "varchar",
           "dataLength": 64,
           "dataPrecision": null,
           "dataScale": null,
@@ -70,14 +70,14 @@ The model definition consists of the following properties:
       "productId": {
         "type": "String",
         "required": false,
-        "length": 20,
+        "length": 64,
         "precision": null,
         "scale": null,
         "id": 1,
         "mssql": {
           "columnName": "product_id",
-          "dataType": "character varying",
-          "dataLength": 20,
+          "dataType": "varchar",
+          "dataLength": 64,
           "dataPrecision": null,
           "dataScale": null,
           "nullable": "YES"
@@ -86,14 +86,14 @@ The model definition consists of the following properties:
       "locationId": {
         "type": "String",
         "required": false,
-        "length": 20,
+        "length": 64,
         "precision": null,
         "scale": null,
         "id": 1,
         "mssql": {
           "columnName": "location_id",
-          "dataType": "character varying",
-          "dataLength": 20,
+          "dataType": "varchar",
+          "dataLength": 64,
           "dataPrecision": null,
           "dataScale": null,
           "nullable": "YES"
@@ -103,13 +103,13 @@ The model definition consists of the following properties:
         "type": "Number",
         "required": false,
         "length": null,
-        "precision": 32,
+        "precision": 10,
         "scale": 0,
         "mssql": {
           "columnName": "available",
-          "dataType": "integer",
+          "dataType": "int",
           "dataLength": null,
-          "dataPrecision": 32,
+          "dataPrecision": 10,
           "dataScale": 0,
           "nullable": "YES"
         }
@@ -118,13 +118,13 @@ The model definition consists of the following properties:
         "type": "Number",
         "required": false,
         "length": null,
-        "precision": 32,
+        "precision": 10,
         "scale": 0,
         "mssql": {
           "columnName": "total",
-          "dataType": "integer",
+          "dataType": "int",
           "dataLength": null,
-          "dataPrecision": 32,
+          "dataPrecision": 10,
           "dataScale": 0,
           "nullable": "YES"
         }
