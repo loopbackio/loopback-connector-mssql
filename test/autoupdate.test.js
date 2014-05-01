@@ -87,7 +87,6 @@ describe('MS SQL server connector', function () {
     ds.automigrate(function (err) {
       assert(!err);
       ds.discoverModelProperties('CUSTOMER_TEST', function (err, props) {
-        console.error(err);
         assert(!err);
         assert.equal(props.length, 4);
         var names = props.map(function (p) {
