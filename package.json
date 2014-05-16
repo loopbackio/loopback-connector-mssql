@@ -15,7 +15,7 @@
   "dependencies": {
     "mssql": "~0.5.3",
     "debug": "~0.8.0",
-    "async": "~0.7.0"
+    "async": "~0.9.0"
   },
   "peerDependencies": {
     "loopback-datasource-juggler": "1.x"
