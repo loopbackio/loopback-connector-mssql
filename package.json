@@ -13,12 +13,10 @@
   ],
   "main": "index.js",
   "dependencies": {
-    "mssql": "~0.5.3",
+    "async": "~0.9.0",
     "debug": "~0.8.0",
-    "async": "~0.9.0"
-  },
-  "peerDependencies": {
-    "loopback-datasource-juggler": "1.x"
+    "loopback-connector": "1.x",
+    "mssql": "~0.5.3"
   },
   "devDependencies": {
     "loopback-datasource-juggler": "1.x",
