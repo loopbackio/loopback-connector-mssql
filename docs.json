@@ -1,0 +1,15 @@
+{
+  "content": [
+    {
+      "title": "LoopBack SQL Server Connector API",
+      "depth": 2
+    },
+    "lib/mssql.js",
+    {
+      "title": "SQL Server Discovery API",
+      "depth": 2
+    },
+    "lib/discovery.js"
+  ],
+  "codeSectionDepth": 3
+}
