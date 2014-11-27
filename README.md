@@ -33,7 +33,7 @@ To use it you need `loopback-datasource-juggler`.
         var DataSource = require('loopback-datasource-juggler').DataSource;
         var dataSource = new DataSource('mssql', {
             host: 'demo.strongloop.com',
-            port: 3306,
+            port: 1433,
             database: 'mydb',
             username: 'myuser',
             password: 'mypass'
