@@ -1,3 +1,11 @@
+2014-12-05, Version 1.1.6
+=========================
+
+ * Update deps (Raymond Feng)
+
+ * Map required/id properties to NOT NULL (Raymond Feng)
+
+
 2014-11-27, Version 1.1.5
 =========================
 
