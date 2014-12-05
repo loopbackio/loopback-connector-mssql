@@ -32,7 +32,7 @@ describe('MS SQL server connector', function () {
         },
         "email": {
           "type": "String",
-          "required": false,
+          "required": true,
           "length": 40
         },
         "age": {
@@ -66,7 +66,7 @@ describe('MS SQL server connector', function () {
             "columnName": "EMAIL",
             "dataType": "nvarchar",
             "dataLength": 60,
-            "nullable": "Y"
+            "nullable": "YES"
           }
         },
         "firstName": {
@@ -92,6 +92,11 @@ describe('MS SQL server connector', function () {
         var names = props.map(function (p) {
           return p.columnName;
         });
+        assert.equal(props[0].nullable, 'NO');
+        assert.equal(props[1].nullable, 'YES');
+        assert.equal(props[2].nullable, 'NO');
+        assert.equal(props[3].nullable, 'YES');
+
         assert.equal(names[0], 'id');
         assert.equal(names[1], 'name');
         assert.equal(names[2], 'email');
