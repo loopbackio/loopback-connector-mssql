@@ -1,3 +1,15 @@
+2014-12-09, Version 1.2.0
+=========================
+
+ * Update test dep (Raymond Feng)
+
+ * Fix the missing var (Raymond Feng)
+
+ * fixed race condition causing incorrect IDs to be reported on INSERT (bitmage)
+
+ * handle precision and scale (bitmage)
+
+
 2014-12-05, Version 1.1.6
 =========================
 
