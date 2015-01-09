@@ -14,7 +14,7 @@ Contributing to `loopback-connector-mssql` is easy. In a few simple steps:
   * Adhere to code style outlined in the [Google C++ Style Guide][] and
     [Google Javascript Style Guide][].
 
-  * Sign the [Contributor License Agreement](https://cla.strongloop.com/strongloop/loopback-connector-mssql)
+  * Sign the [Contributor License Agreement](https://cla.strongloop.com/agreements/strongloop/loopback-connector-mssql)
 
   * Submit a pull request through Github.
 
