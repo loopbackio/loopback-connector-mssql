@@ -134,4 +134,24 @@ describe('mssql connector', function () {
       });
     });
 
+  it('should perform an empty inq',
+    function(done) {
+      Post.find({where: {id: {inq: []}}}, function(err, p) {
+        should.not.exist(err);
+        should.exist(p);
+        p.should.have.length(0);
+        done();
+      });
+    });
+
+  it('should perform an empty nin',
+    function(done) {
+      Post.find({where: {id: {nin: []}}}, function(err, p) {
+        should.not.exist(err);
+        should.exist(p);
+        p.should.have.length(4);
+        done();
+      });
+    });
+
 });
