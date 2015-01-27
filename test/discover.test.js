@@ -64,7 +64,7 @@ describe('Discover models including other users', function () {
 
     db.discoverModelDefinitions({
       all: true,
-      limit: 50
+      limit: 100
     }, function (err, models) {
       if (err) {
         console.error(err);

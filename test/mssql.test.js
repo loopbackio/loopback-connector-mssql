@@ -2,7 +2,7 @@ require('./init');
 
 var should = require('should');
 
-var Post, db;
+var Post, PostWithUUID, PostWithStringId, db;
 
 describe('mssql connector', function () {
 
@@ -14,12 +14,28 @@ describe('mssql connector', function () {
       content: { type: String },
       approved: Boolean
     });
+
+    PostWithUUID = db.define('PostWithUUID', {
+      id: {type: String, generated: true, id: true},
+      title: { type: String, length: 255, index: true },
+      content: { type: String },
+      approved: Boolean
+    });
+
+    PostWithStringId = db.define('PostWithStringId', {
+      id: {type: String, id: true, generated: false},
+      title: { type: String, length: 255, index: true },
+      content: { type: String },
+      approved: Boolean
+    });
+
   });
 
-  it('should run migration', function (done) {
-    db.automigrate('PostWithBoolean', function () {
-      done();
-    });
+  it('should run migration', function(done) {
+    db.automigrate(['PostWithBoolean', 'PostWithUUID', 'PostWithStringId'],
+      function(err) {
+        done(err);
+      });
   });
   
   var post;
@@ -134,6 +150,16 @@ describe('mssql connector', function () {
       });
     });
 
+  it('should allow string array for inq',
+    function(done) {
+      Post.find({where: {content: {inq: ['C1', 'C2']}}}, function(err, p) {
+        should.not.exist(err);
+        should.exist(p);
+        p.should.have.length(2);
+        done();
+      });
+    });
+
   it('should perform an empty inq',
     function(done) {
       Post.find({where: {id: {inq: []}}}, function(err, p) {
@@ -153,5 +179,33 @@ describe('mssql connector', function () {
         done();
       });
     });
+
+  it('should support uuid', function(done) {
+    PostWithUUID.create({title: 'T1', content: 'C1', approved: true},
+      function(err, p) {
+        should.not.exists(err);
+        p.should.have.property('id');
+        // p.id.should.be.a.string();
+        PostWithUUID.findById(p.id, function(err, p) {
+          should.not.exists(err);
+          p.should.have.property('title', 'T1');
+          done();
+        });
+      });
+  });
+
+  it('should support string id', function(done) {
+    PostWithStringId.create({title: 'T1', content: 'C1', approved: true},
+      function(err, p) {
+        should.not.exists(err);
+        p.should.have.property('id');
+        p.id.should.be.a.string;
+        PostWithStringId.findById(p.id, function(err, p) {
+          should.not.exists(err);
+          p.should.have.property('title', 'T1');
+          done();
+        });
+      });
+  });
 
 });
