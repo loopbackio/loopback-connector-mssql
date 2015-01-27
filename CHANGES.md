@@ -1,3 +1,15 @@
+2015-01-27, Version 1.4.0
+=========================
+
+ * Fix the empty column list (Raymond Feng)
+
+ * Increase the limit to make sure other owners are selected (Raymond Feng)
+
+ * Enhance id to pk mapping (Raymond Feng)
+
+ * Fix: empty inq/nin function correctly (bitmage)
+
+
 2015-01-09, Version 1.3.0
 =========================
 
