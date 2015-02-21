@@ -13,16 +13,17 @@
   ],
   "main": "index.js",
   "dependencies": {
-    "async": "~0.9.0",
-    "debug": "^2.0.0",
+    "async": "^0.9.0",
+    "debug": "^2.1.1",
     "loopback-connector": "1.x",
-    "mssql": "^1.2.0"
+    "mssql": "^2.1.0"
   },
   "devDependencies": {
+    "bluebird": "^2.9.12",
     "loopback-datasource-juggler": "2.x",
-    "mocha": "~1.20.1",
-    "should": "~1.2.2",
-    "rc": "~0.4.0"
+    "mocha": "^2.1.0",
+    "rc": "^0.6.0",
+    "should": "^5.0.0"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha --timeout 5000 -R spec"
@@ -36,6 +37,6 @@
     "url": "https://github.com/strongloop/loopback-connector-mssql/blob/master/LICENSE"
   },
   "optionalDependencies": {
-    "sl-blip": "http://blip.strongloop.com/loopback-connector-mssql@1.4.0"
+    "sl-blip": "http://blip.strongloop.com/loopback-connector-mssql@1.0.0"
   }
 }
