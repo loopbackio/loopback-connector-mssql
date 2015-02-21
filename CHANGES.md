@@ -1,3 +1,9 @@
+2015-02-21, Version 1.5.0
+=========================
+
+ * Add support for custom column mapping (Raymond Feng)
+
+
 2015-01-27, Version 1.4.0
 =========================
 
