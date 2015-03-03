@@ -27,7 +27,6 @@ describe('Mapping models', function() {
           generated: true,
           mssql: {
             columnName: 'PRODUCT_ID',
-            dataType: 'uniqueidentifier',
             nullable: 'N'
           }
         },
