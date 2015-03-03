@@ -1,6 +1,6 @@
 {
   "name": "loopback-connector-mssql",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Microsoft SQL Server connector for LoopBack",
   "keywords": [
     "StrongLoop",
@@ -37,6 +37,6 @@
     "url": "https://github.com/strongloop/loopback-connector-mssql/blob/master/LICENSE"
   },
   "optionalDependencies": {
-    "sl-blip": "http://blip.strongloop.com/loopback-connector-mssql@1.5.0"
+    "sl-blip": "http://blip.strongloop.com/loopback-connector-mssql@1.5.1"
   }
 }

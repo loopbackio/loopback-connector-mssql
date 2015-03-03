@@ -1,4 +1,14 @@
-2015-02-21, Version 1.5.0
+2015-03-03, Version 1.5.1
+=========================
+
+ * Test if the id is generated (Raymond Feng)
+
+ * add test case for id manipulation (Ido Shamun)
+
+ * Add support for custom column mapping in primary key column Add support for idInjection (Ido Shamun)
+
+
+2015-02-20, Version 1.5.0
 =========================
 
  * Add support for custom column mapping (Raymond Feng)
