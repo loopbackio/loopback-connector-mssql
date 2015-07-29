@@ -1,3 +1,9 @@
+2015-07-29, Version 2.2.0
+=========================
+
+ * Add support for regex operator (Simon Ho)
+
+
 2015-05-18, Version 2.1.0
 =========================
 
