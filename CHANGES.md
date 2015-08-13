@@ -1,3 +1,9 @@
+2015-08-13, Version 2.2.1
+=========================
+
+ * Allow the `multipleResultSets` flag for execute (Raymond Feng)
+
+
 2015-07-29, Version 2.2.0
 =========================
 
