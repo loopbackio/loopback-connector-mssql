@@ -1,3 +1,9 @@
+2015-08-14, Version 2.3.0
+=========================
+
+ * Added support to unicode (Ahmed Abdul Moniem)
+
+
 2015-08-13, Version 2.2.1
 =========================
 
