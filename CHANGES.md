@@ -1,3 +1,9 @@
+2015-09-11, Version 2.3.1
+=========================
+
+ * Allow models without PK (Raymond Feng)
+
+
 2015-08-14, Version 2.3.0
 =========================
 
