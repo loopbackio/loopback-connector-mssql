@@ -34,10 +34,7 @@
     "type": "git",
     "url": "https://github.com/strongloop/loopback-connector-mssql.git"
   },
-  "license": {
-    "name": "StrongLoop",
-    "url": "https://github.com/strongloop/loopback-connector-mssql/blob/master/LICENSE"
-  },
+  "license": "SEE LICENSE IN LICENSE.md",
   "optionalDependencies": {
     "sl-blip": "http://blip.strongloop.com/loopback-connector-mssql@2.3.1"
   }
