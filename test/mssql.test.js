@@ -208,4 +208,55 @@ describe('mssql connector', function () {
       });
   });
 
+  context('regexp operator', function() {
+    beforeEach(function deleteExistingTestFixtures(done) {
+      Post.destroyAll(done);
+    });
+    beforeEach(function createTestFixtures(done) {
+      Post.create([
+        {title: 'a', content: 'AAA'},
+        {title: 'b', content: 'BBB'}
+      ], done);
+    });
+    beforeEach(function addSpy() {
+      sinon.stub(console, 'warn');
+    });
+    afterEach(function removeSpy()  {
+      console.warn.restore();
+    });
+    after(function deleteTestFixtures(done) {
+      Post.destroyAll(done);
+    });
+
+    context('with regex strings', function() {
+      it('should print a warning and return an error', function(done) {
+        Post.find({where: {content: {regexp: '^A'}}}, function(err, posts) {
+          console.warn.calledOnce.should.be.ok;
+          should.exist(err);
+          done();
+        });
+      });
+    });
+
+    context('with regex literals', function() {
+      it('should print a warning and return an error', function(done) {
+        Post.find({where: {content: {regexp: /^A/}}}, function(err, posts) {
+          console.warn.calledOnce.should.be.ok;
+          should.exist(err);
+          done();
+        });
+      });
+    });
+
+    context('with regex objects', function() {
+      it('should print a warning and return an error', function(done) {
+        Post.find({where: {content: {regexp: new RegExp(/^A/)}}}, function(err,
+            posts) {
+          console.warn.calledOnce.should.be.ok;
+          should.exist(err);
+          done();
+        });
+      });
+    });
+  });
 });

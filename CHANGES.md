@@ -1,4 +1,52 @@
-2015-03-03, Version 1.5.1
+2015-09-11, Version 2.3.1
+=========================
+
+ * Allow models without PK (Raymond Feng)
+
+
+2015-08-14, Version 2.3.0
+=========================
+
+ * Added support to unicode (Ahmed Abdul Moniem)
+
+
+2015-08-13, Version 2.2.1
+=========================
+
+ * Allow the `multipleResultSets` flag for execute (Raymond Feng)
+
+
+2015-07-29, Version 2.2.0
+=========================
+
+ * Add support for regex operator (Simon Ho)
+
+
+2015-05-18, Version 2.1.0
+=========================
+
+ * Update deps (Raymond Feng)
+
+ * Add transaction support (Raymond Feng)
+
+
+2015-05-13, Version 2.0.0
+=========================
+
+ * Update deps (Raymond Feng)
+
+ * Refactor the mssql connector to use base SqlConnector (Raymond Feng)
+
+ * Use SET IDENTITY_INSERT option to allow explicit id (Raymond Feng)
+
+ * Return count when updating or deleting models (Simon Ho)
+
+ * Add strongloop license check (Raymond Feng)
+
+ * Add "Running tests" section to readme (Simon Ho)
+
+
+2015-03-02, Version 1.5.1
 =========================
 
  * Test if the id is generated (Raymond Feng)
