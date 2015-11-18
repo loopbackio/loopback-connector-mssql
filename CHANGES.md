@@ -1,3 +1,13 @@
+2015-11-18, Version 2.3.2
+=========================
+
+ * Inject Partition By clause into buildColumnNames of SQL query for include filter (eugene-frb)
+
+ * Refer to licenses with a link (Sam Roberts)
+
+ * Use strongloop conventions for licensing (Sam Roberts)
+
+
 2015-09-11, Version 2.3.1
 =========================
 
