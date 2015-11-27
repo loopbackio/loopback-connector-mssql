@@ -1,3 +1,11 @@
+2015-11-27, Version 2.3.3
+=========================
+
+ * Remove buildPartitionBy() that became redundant (eugene-frb)
+
+ * Updated option that triggers PARTITION BY injection, fixed buildPartitionByFirst's 'where' argument. (eugene-frb)
+
+
 2015-11-18, Version 2.3.2
 =========================
 
