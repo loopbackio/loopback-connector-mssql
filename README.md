@@ -36,7 +36,10 @@ To use it you need `loopback-datasource-juggler`.
             port: 1433,
             database: 'mydb',
             username: 'myuser',
-            password: 'mypass'
+            password: 'mypass',
+            
+            // You need this if using Microsoft Azure SQL database
+            // options: { encrypt: true }
         });
     ```
 
