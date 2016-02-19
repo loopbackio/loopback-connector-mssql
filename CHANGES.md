@@ -1,4 +1,10 @@
-2016-02-10, Version 2.4.0
+2016-02-19, Version 2.4.1
+=========================
+
+ * Remove sl-blip from dependencies (Miroslav Bajtoš)
+
+
+2016-02-09, Version 2.4.0
 =========================
 
  * Refactor Fix for Insert into Table with Active Trigger by getting the column data type instead of varchar. https://github.com/strongloop/loopback-connector-mssql/issues/21 (FoysalOsmany)
