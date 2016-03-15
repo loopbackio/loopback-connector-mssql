@@ -18,6 +18,7 @@
     "loopback-connector": "^2.1.0",
     "mssql": "^3.1.1"
   },
+  "bundledDependencies": ["mssql"],
   "devDependencies": {
     "bluebird": "^3.3.3",
     "loopback-datasource-juggler": "^2.28.0",
@@ -27,7 +28,8 @@
     "sinon": "^1.15.4"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha --timeout 5000 -R spec"
+    "test": "./node_modules/.bin/mocha --timeout 5000 -R spec",
+    "prepublish": "node remove-regenerator.js"
   },
   "repository": {
     "type": "git",
