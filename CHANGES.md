@@ -1,3 +1,9 @@
+2016-03-16, Version 2.6.0
+=========================
+
+ * Remove regenerator from babel-runtime and bundle mssql (Raymond Feng)
+
+
 2016-03-10, Version 2.5.1
 =========================
 

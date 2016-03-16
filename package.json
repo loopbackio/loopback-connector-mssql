@@ -1,6 +1,6 @@
 {
   "name": "loopback-connector-mssql",
-  "version": "2.5.1",
+  "version": "2.6.0",
   "description": "Microsoft SQL Server connector for LoopBack",
   "keywords": [
     "StrongLoop",
@@ -18,7 +18,9 @@
     "loopback-connector": "^2.1.0",
     "mssql": "^3.1.1"
   },
-  "bundledDependencies": ["mssql"],
+  "bundledDependencies": [
+    "mssql"
+  ],
   "devDependencies": {
     "bluebird": "^3.3.3",
     "loopback-datasource-juggler": "^2.28.0",
