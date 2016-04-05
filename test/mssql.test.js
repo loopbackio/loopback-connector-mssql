@@ -150,6 +150,32 @@ describe('mssql connector', function () {
       });
     });
 
+  it('should avoid SQL injection for parameters containing (?)',
+    function(done) {
+      var connector = db.connector;
+      var value1 = '(?)';
+      var value2 = ', 1 ); INSERT INTO SQLI_TEST VALUES (1, 2); --';
+
+      connector.execute('DROP TABLE SQLI_TEST;', function(err) {
+        connector.execute('CREATE TABLE SQLI_TEST' +
+          '(V1 VARCHAR(100), V2 VARCHAR(100) )',
+          function(err) {
+            if (err) return done(err);
+            connector.execute('INSERT INTO SQLI_TEST VALUES ( (?), (?) )',
+              [value1, value2], function(err) {
+                if (err) return done(err);
+                connector.execute('SELECT * FROM SQLI_TEST', function(err, data) {
+                  if (err) return done(err);
+                  data.should.be.eql(
+                    [ { V1: '(?)',
+                      V2: ', 1 ); INSERT INTO SQLI_TEST VALUES (1, 2); --' } ]);
+                  done();
+                });
+                });
+              });
+          });
+      });
+
   it('should allow string array for inq',
     function(done) {
       Post.find({where: {content: {inq: ['C1', 'C2']}}}, function(err, p) {
