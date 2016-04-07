@@ -26,6 +26,7 @@ describe('mssql connector', function () {
       id: {type: String, id: true, generated: false},
       title: { type: String, length: 255, index: true },
       content: { type: String },
+      rating: {type: Number, mssql: {dataType: 'FLOAT'}},
       approved: Boolean
     });
 
@@ -221,7 +222,8 @@ describe('mssql connector', function () {
   });
 
   it('should support string id', function(done) {
-    PostWithStringId.create({title: 'T1', content: 'C1', approved: true},
+    PostWithStringId.create(
+      {title: 'T1', content: 'C1', approved: true, rating: 3.5},
       function(err, p) {
         should.not.exists(err);
         p.should.have.property('id');
@@ -229,6 +231,7 @@ describe('mssql connector', function () {
         PostWithStringId.findById(p.id, function(err, p) {
           should.not.exists(err);
           p.should.have.property('title', 'T1');
+          p.should.have.property('rating', 3.5);
           done();
         });
       });
