@@ -1,3 +1,11 @@
+2016-04-07, Version 2.7.1
+=========================
+
+ * Keep float numbers (Raymond Feng)
+
+ * override other settings if url provided (juehou)
+
+
 2016-04-05, Version 2.7.0
 =========================
 
