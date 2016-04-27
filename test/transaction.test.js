@@ -10,8 +10,8 @@ describe('transactions', function() {
   before(function(done) {
     db = getDataSource();
     Post = db.define('PostTX', {
-      title: {type: String, length: 255, index: true},
-      content: {type: String}
+      title: { type: String, length: 255, index: true },
+      content: { type: String },
     });
     db.automigrate('PostTX', done);
   });
@@ -24,7 +24,7 @@ describe('transactions', function() {
         function(err, tx) {
           if (err) return done(err);
           currentTx = tx;
-          Post.create(post, {transaction: tx},
+          Post.create(post, { transaction: tx },
             function(err, p) {
               if (err) {
                 done(err);
@@ -44,7 +44,7 @@ describe('transactions', function() {
       if (inTx) {
         options.transaction = currentTx;
       }
-      Post.find({where: where}, options,
+      Post.find({ where: where }, options,
         function(err, posts) {
           if (err) return done(err);
           posts.length.should.be.eql(count);
@@ -55,7 +55,7 @@ describe('transactions', function() {
 
   describe('commit', function() {
 
-    var post = {title: 't1', content: 'c1'};
+    var post = { title: 't1', content: 'c1' };
     before(createPostInTx(post));
 
     // FIXME: [rfeng] SQL server creates LCK_M_S (Shared Lock on the table
@@ -75,7 +75,7 @@ describe('transactions', function() {
 
   describe('rollback', function() {
 
-    var post = {title: 't2', content: 'c2'};
+    var post = { title: 't2', content: 'c2' };
     before(createPostInTx(post));
 
     // FIXME: [rfeng] SQL server creates LCK_M_S (Shared Lock on the table

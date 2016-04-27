@@ -1,6 +1,6 @@
-describe('mssql imported features', function () {
+describe('mssql imported features', function() {
 
-  before(function () {
+  before(function() {
     require('./init.js');
   });
 

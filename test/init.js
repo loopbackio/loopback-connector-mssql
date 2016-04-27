@@ -4,18 +4,18 @@ var DataSource = require('loopback-datasource-juggler').DataSource;
 
 var config = {};
 try {
-  config = require('rc')('loopback', {test: {mssql: {}}}).test.mssql;
-} catch(err) {
+  config = require('rc')('loopback', { test: { mssql: {}}}).test.mssql;
+} catch (err) {
   config = {
     user: 'demo',
     password: 'L00pBack',
     host: 'localhost',
     database: 'demo',
-    supportsOffSetFetch: Math.random() > 0.5
+    supportsOffSetFetch: Math.random() > 0.5,
   };
 }
 
-global.getConfig = function (options) {
+global.getConfig = function(options) {
 
   var dbConf = {
     host: config.host || config.hostname || config.server || 'localhost',
@@ -26,8 +26,8 @@ global.getConfig = function (options) {
     pool: {
       max: 10,
       min: 0,
-      idleTimeoutMillis: 30000
-    }
+      idleTimeoutMillis: 30000,
+    },
   };
 
   if (options) {
@@ -39,7 +39,7 @@ global.getConfig = function (options) {
   return dbConf;
 };
 
-global.getDataSource = global.getSchema = function (options) {
+global.getDataSource = global.getSchema = function(options) {
   var db = new DataSource(require('../'), getConfig(options));
   return db;
 };

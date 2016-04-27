@@ -9,7 +9,7 @@ var config;
 
 before(function() {
   config = global.getConfig();
-  console.log("config", config);
+  console.log('config', config);
 });
 
 describe('testConnection', function() {
@@ -41,8 +41,8 @@ function generateURL(config) {
     hostname:config.host,
     port: config.port,
     pathname: config.database,
-    query: {encrypt: true},
-    slashes: true
+    query: { encrypt: true },
+    slashes: true,
   };
   var formatedUrl = url.format(urlObj);
   return formatedUrl;
