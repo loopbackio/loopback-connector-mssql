@@ -6,7 +6,6 @@ var Transaction = require('loopback-connector').Transaction;
 var db, Post;
 
 describe('transactions', function() {
-
   before(function(done) {
     db = getDataSource();
     Post = db.define('PostTX', {
@@ -54,7 +53,6 @@ describe('transactions', function() {
   }
 
   describe('commit', function() {
-
     var post = { title: 't1', content: 'c1' };
     before(createPostInTx(post));
 
@@ -74,7 +72,6 @@ describe('transactions', function() {
   });
 
   describe('rollback', function() {
-
     var post = { title: 't2', content: 'c2' };
     before(createPostInTx(post));
 
@@ -92,12 +89,5 @@ describe('transactions', function() {
 
     it('should not see the rolledback insert', expectToFindPosts(post, 0));
   });
-
 });
-
-
-
-
-
-
 

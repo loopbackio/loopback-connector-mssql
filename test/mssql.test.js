@@ -1,11 +1,9 @@
 require('./init');
 
 var should = require('should');
-
 var Post, PostWithUUID, PostWithStringId, db;
 
 describe('mssql connector', function() {
-
   before(function() {
     db = getDataSource();
 
@@ -29,7 +27,6 @@ describe('mssql connector', function() {
       rating: { type: Number, mssql: { dataType: 'FLOAT' }},
       approved: Boolean,
     });
-
   });
 
   it('should run migration', function(done) {
@@ -62,7 +59,6 @@ describe('mssql connector', function() {
       });
     });
   });
-
 
   it('should support boolean types with false value', function(done) {
     Post.create({ title: 'T2', content: 'C2', approved: false }, function(err, p) {
@@ -279,12 +275,14 @@ describe('mssql connector', function() {
 
     context('with regex objects', function() {
       it('should print a warning and return an error', function(done) {
-        Post.find({ where: { content: { regexp: new RegExp(/^A/) }}}, function(err,
-            posts) {
-          console.warn.calledOnce.should.be.ok;
-          should.exist(err);
-          done();
-        });
+        Post.find(
+          { where: { content: { regexp: new RegExp(/^A/) }}},
+          function(err, posts) {
+            console.warn.calledOnce.should.be.ok;
+            should.exist(err);
+            done();
+          }
+        );
       });
     });
   });

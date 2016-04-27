@@ -10,26 +10,25 @@ before(function() {
 
 describe('Manipulating id column', function() {
   it('should auto generate id', function(done) {
-
     var schema =
       {
-        'name': 'WarehouseTest',
-        'options': {
-          'mssql': {
-          'schema': 'dbo',
-          'table': 'WAREHOUSE_TEST',
+        name: 'WarehouseTest',
+        options: {
+          mssql: {
+            schema: 'dbo',
+            table: 'WAREHOUSE_TEST',
+          },
         },
-        },
-        'properties': {
-          'id': {
-          'type': 'Number',
-          'id': true,
-        },
-          'name': {
-          'type': 'String',
-          'required': false,
-          'length': 40,
-        },
+        properties: {
+          id: {
+            type: 'Number',
+            id: true,
+          },
+          name: {
+            type: 'String',
+            required: false,
+            length: 40,
+          },
         },
       };
 
@@ -71,28 +70,27 @@ describe('Manipulating id column', function() {
   });
 
   it('should use manual id', function(done) {
-
     var schema =
       {
-        'name': 'WarehouseTest',
-        'options': {
-          'idInjection': false,
-          'mssql': {
-          'schema': 'dbo',
-          'table': 'WAREHOUSE_TEST',
+        name: 'WarehouseTest',
+        options: {
+          idInjection: false,
+          mssql: {
+            schema: 'dbo',
+            table: 'WAREHOUSE_TEST',
+          },
         },
-        },
-        'properties': {
-          'id': {
-          'type': 'Number',
-          'id': true,
-          'generated': false,
-        },
-          'name': {
-          'type': 'String',
-          'required': false,
-          'length': 40,
-        },
+        properties: {
+          id: {
+            type: 'Number',
+            id: true,
+            generated: false,
+          },
+          name: {
+            type: 'String',
+            required: false,
+            length: 40,
+          },
         },
       };
 
@@ -124,33 +122,32 @@ describe('Manipulating id column', function() {
   });
 
   it('should use bigint id', function(done) {
-
     var schema =
       {
-        'name': 'WarehouseTest',
-        'options': {
-          'idInjection': false,
-          'mssql': {
-          'schema': 'dbo',
-          'table': 'WAREHOUSE_TEST',
-        },
-        },
-        'properties': {
-          'id': {
-          'type': 'Number',
-          'id': true,
-          'generated': false,
-          'mssql': {
-            'dataType': 'bigint',
-            'dataPrecision': 20,
-            'dataScale': 0,
+        name: 'WarehouseTest',
+        options: {
+          idInjection: false,
+          mssql: {
+            schema: 'dbo',
+            table: 'WAREHOUSE_TEST',
           },
         },
-          'name': {
-          'type': 'String',
-          'required': false,
-          'length': 40,
-        },
+        properties: {
+          id: {
+            type: 'Number',
+            id: true,
+            generated: false,
+            mssql: {
+              dataType: 'bigint',
+              dataPrecision: 20,
+              dataScale: 0,
+            },
+          },
+          name: {
+            type: 'String',
+            required: false,
+            length: 40,
+          },
         },
       };
 

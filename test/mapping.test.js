@@ -11,7 +11,6 @@ before(function() {
 
 describe('Mapping models', function() {
   it('should honor the mssql settings for table/column', function(done) {
-
     var schema = {
       name: 'TestInventory',
       options: {
@@ -110,6 +109,5 @@ describe('Mapping models', function() {
         },
       ], done);
     });
-
   });
 });

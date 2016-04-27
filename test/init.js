@@ -16,7 +16,6 @@ try {
 }
 
 global.getConfig = function(options) {
-
   var dbConf = {
     host: config.host || config.hostname || config.server || 'localhost',
     port: config.port || 1433,
