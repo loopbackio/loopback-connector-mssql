@@ -1,6 +1,6 @@
 /**
  * This script removes regenerator bundled with babel-runtime
- */ 
+ */
 var fs = require('fs');
 try {
   var index = require.resolve('babel-runtime/regenerator/index.js');
@@ -11,7 +11,7 @@ try {
       if (err) console.error(err);
       if (runtime) fs.unlink(runtime, function(err) {
         if (err) console.error(err);
-      });;
+      }); ;
     });
   }
 } catch (err) {

@@ -1,1 +1,1 @@
-module.exports = require("./lib/mssql.js");
+module.exports = require('./lib/mssql.js');

@@ -11,14 +11,13 @@ before(function() {
 
 describe('Mapping models', function() {
   it('should honor the mssql settings for table/column', function(done) {
-
     var schema = {
       name: 'TestInventory',
       options: {
         idInjection: false,
         mssql: {
-          schema: 'dbo', table: 'INVENTORYTEST'
-        }
+          schema: 'dbo', table: 'INVENTORYTEST',
+        },
       },
       properties: {
         productId: {
@@ -27,8 +26,8 @@ describe('Mapping models', function() {
           generated: true,
           mssql: {
             columnName: 'PRODUCT_ID',
-            nullable: 'N'
-          }
+            nullable: 'N',
+          },
         },
         locationId: {
           type: 'String',
@@ -37,8 +36,8 @@ describe('Mapping models', function() {
           mssql: {
             columnName: 'LOCATION_ID',
             dataType: 'nvarchar',
-            nullable: 'N'
-          }
+            nullable: 'N',
+          },
         },
         available: {
           type: 'Number',
@@ -46,8 +45,8 @@ describe('Mapping models', function() {
           mssql: {
             columnName: 'AVAILABLE',
             dataType: 'int',
-            nullable: 'Y'
-          }
+            nullable: 'Y',
+          },
         },
         total: {
           type: 'Number',
@@ -55,10 +54,10 @@ describe('Mapping models', function() {
           mssql: {
             columnName: 'TOTAL',
             dataType: 'int',
-            nullable: 'Y'
-          }
-        }
-      }
+            nullable: 'Y',
+          },
+        },
+      },
     };
     var models = db.modelBuilder.buildModels(schema);
     var Model = models.TestInventory;
@@ -70,19 +69,19 @@ describe('Mapping models', function() {
           Model.destroyAll(callback);
         },
         function(callback) {
-          Model.create({locationId: 'l001', available: 10, total: 50},
+          Model.create({ locationId: 'l001', available: 10, total: 50 },
             callback);
         },
         function(callback) {
-          Model.create({locationId: 'l002', available: 30, total: 40},
+          Model.create({ locationId: 'l002', available: 30, total: 40 },
             callback);
         },
         function(callback) {
-          Model.create({locationId: 'l001', available: 15, total: 30},
+          Model.create({ locationId: 'l001', available: 15, total: 30 },
             callback);
         },
         function(callback) {
-          Model.find({fields: ['productId', 'locationId', 'available']},
+          Model.find({ fields: ['productId', 'locationId', 'available'] },
             function(err, results) {
               // console.log(results);
               results.should.have.lengthOf(3);
@@ -96,7 +95,7 @@ describe('Mapping models', function() {
             });
         },
         function(callback) {
-          Model.find({fields: {'total': false}}, function(err, results) {
+          Model.find({ fields: { 'total': false }}, function(err, results) {
             // console.log(results);
             results.should.have.lengthOf(3);
             results.forEach(function(r) {
@@ -107,9 +106,8 @@ describe('Mapping models', function() {
             });
             callback(null, results);
           });
-        }
+        },
       ], done);
     });
-
   });
 });

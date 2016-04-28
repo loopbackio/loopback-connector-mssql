@@ -23,6 +23,8 @@
   ],
   "devDependencies": {
     "bluebird": "^3.3.3",
+    "eslint": "^2.8.0",
+    "eslint-config-loopback": "^2.0.0",
     "loopback-datasource-juggler": "^2.28.0",
     "mocha": "^2.1.0",
     "rc": "^1.0.0",
@@ -30,7 +32,9 @@
     "sinon": "^1.15.4"
   },
   "scripts": {
+    "lint": "eslint .",      
     "test": "./node_modules/.bin/mocha --timeout 5000 -R spec",
+    "posttest": "npm run lint",   
     "prepublish": "node remove-regenerator.js"
   },
   "repository": {

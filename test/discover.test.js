@@ -6,20 +6,19 @@ var assert = require('assert');
 
 var db = getDataSource();
 
-describe('discoverModels', function () {
-  describe('Discover models including views', function () {
-    it('should return an array of tables and views', function (done) {
-
+describe('discoverModels', function() {
+  describe('Discover models including views', function() {
+    it('should return an array of tables and views', function(done) {
       db.discoverModelDefinitions({
         views: true,
-        limit: 3
-      }, function (err, models) {
+        limit: 3,
+      }, function(err, models) {
         if (err) {
           console.error(err);
           done(err);
         } else {
           var views = false;
-          models.forEach(function (m) {
+          models.forEach(function(m) {
             // console.dir(m);
             if (m.type === 'view') {
               views = true;
@@ -32,19 +31,18 @@ describe('discoverModels', function () {
     });
   });
 
-  describe('Discover models excluding views', function () {
-    it('should return an array of only tables', function (done) {
-
+  describe('Discover models excluding views', function() {
+    it('should return an array of only tables', function(done) {
       db.discoverModelDefinitions({
         views: false,
-        limit: 3
-      }, function (err, models) {
+        limit: 3,
+      }, function(err, models) {
         if (err) {
           console.error(err);
           done(err);
         } else {
           var views = false;
-          models.forEach(function (m) {
+          models.forEach(function(m) {
             // console.dir(m);
             if (m.type === 'view') {
               views = true;
@@ -59,19 +57,18 @@ describe('discoverModels', function () {
   });
 });
 
-describe('Discover models including other users', function () {
-  it('should return an array of all tables and views', function (done) {
-
+describe('Discover models including other users', function() {
+  it('should return an array of all tables and views', function(done) {
     db.discoverModelDefinitions({
       all: true,
-      limit: 100
-    }, function (err, models) {
+      limit: 100,
+    }, function(err, models) {
       if (err) {
         console.error(err);
         done(err);
       } else {
         var others = false;
-        models.forEach(function (m) {
+        models.forEach(function(m) {
           // console.dir(m);
           if (m.owner !== 'dbo') {
             others = true;
@@ -84,15 +81,15 @@ describe('Discover models including other users', function () {
   });
 });
 
-describe('Discover model properties', function () {
-  describe('Discover a named model', function () {
-    it('should return an array of columns for product', function (done) {
-      db.discoverModelProperties('product', function (err, models) {
+describe('Discover model properties', function() {
+  describe('Discover a named model', function() {
+    it('should return an array of columns for product', function(done) {
+      db.discoverModelProperties('product', function(err, models) {
         if (err) {
           console.error(err);
           done(err);
         } else {
-          models.forEach(function (m) {
+          models.forEach(function(m) {
             // console.dir(m);
             assert(m.tableName === 'product');
           });
@@ -101,17 +98,16 @@ describe('Discover model properties', function () {
       });
     });
   });
-
 });
 
-describe('Discover model primary keys', function () {
-  it('should return an array of primary keys for product', function (done) {
-    db.discoverPrimaryKeys('product', function (err, models) {
+describe('Discover model primary keys', function() {
+  it('should return an array of primary keys for product', function(done) {
+    db.discoverPrimaryKeys('product', function(err, models) {
       if (err) {
         console.error(err);
         done(err);
       } else {
-        models.forEach(function (m) {
+        models.forEach(function(m) {
           // console.dir(m);
           assert(m.tableName === 'product');
         });
@@ -120,13 +116,13 @@ describe('Discover model primary keys', function () {
     });
   });
 
-  it('should return an array of primary keys for dbo.product', function (done) {
-    db.discoverPrimaryKeys('product', {owner: 'dbo'}, function (err, models) {
+  it('should return an array of primary keys for dbo.product', function(done) {
+    db.discoverPrimaryKeys('product', { owner: 'dbo' }, function(err, models) {
       if (err) {
         console.error(err);
         done(err);
       } else {
-        models.forEach(function (m) {
+        models.forEach(function(m) {
           // console.dir(m);
           assert(m.tableName === 'product');
         });
@@ -136,14 +132,14 @@ describe('Discover model primary keys', function () {
   });
 });
 
-describe('Discover model foreign keys', function () {
-  it('should return an array of foreign keys for inventory', function (done) {
-    db.discoverForeignKeys('inventory', function (err, models) {
+describe('Discover model foreign keys', function() {
+  it('should return an array of foreign keys for inventory', function(done) {
+    db.discoverForeignKeys('inventory', function(err, models) {
       if (err) {
         console.error(err);
         done(err);
       } else {
-        models.forEach(function (m) {
+        models.forEach(function(m) {
           // console.dir(m);
           assert(m.fkTableName === 'inventory');
         });
@@ -151,13 +147,13 @@ describe('Discover model foreign keys', function () {
       }
     });
   });
-  it('should return an array of foreign keys for dbo.inventory', function (done) {
-    db.discoverForeignKeys('inventory', {owner: 'dbo'}, function (err, models) {
+  it('should return an array of foreign keys for dbo.inventory', function(done) {
+    db.discoverForeignKeys('inventory', { owner: 'dbo' }, function(err, models) {
       if (err) {
         console.error(err);
         done(err);
       } else {
-        models.forEach(function (m) {
+        models.forEach(function(m) {
           // console.dir(m);
           assert(m.fkTableName === 'inventory');
         });
@@ -167,9 +163,9 @@ describe('Discover model foreign keys', function () {
   });
 });
 
-describe('Discover adl schema from a table', function () {
-  it('should return an adl schema for inventory', function (done) {
-    db.discoverSchema('inventory', {owner: 'dbo'}, function (err, schema) {
+describe('Discover adl schema from a table', function() {
+  it('should return an adl schema for inventory', function(done) {
+    db.discoverSchema('inventory', { owner: 'dbo' }, function(err, schema) {
       // console.log('%j', schema);
       assert(schema.name === 'Inventory');
       assert(schema.options.mssql.schema === 'dbo');

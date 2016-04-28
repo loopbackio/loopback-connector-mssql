@@ -9,7 +9,7 @@ var config;
 
 before(function() {
   config = global.getConfig();
-  console.log("config", config);
+  console.log('config', config);
 });
 
 describe('testConnection', function() {
@@ -37,12 +37,12 @@ describe('testConnection', function() {
 function generateURL(config) {
   var urlObj = {
     protocol: 'mssql',
-    auth:config.user + ':' + config.password,
-    hostname:config.host,
+    auth: config.user + ':' + config.password,
+    hostname: config.host,
     port: config.port,
     pathname: config.database,
-    query: {encrypt: true},
-    slashes: true
+    query: { encrypt: true },
+    slashes: true,
   };
   var formatedUrl = url.format(urlObj);
   return formatedUrl;
