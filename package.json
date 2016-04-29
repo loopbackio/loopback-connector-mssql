@@ -15,7 +15,7 @@
   "dependencies": {
     "async": "^1.5.2",
     "debug": "^2.1.1",
-    "loopback-connector": "^2.1.0",
+    "loopback-connector": "git+https://github.com/vsantosbruno/loopback-connector.git",
     "mssql": "^3.1.1"
   },
   "bundledDependencies": [
