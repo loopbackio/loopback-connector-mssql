@@ -46,4 +46,42 @@ function generateURL(config) {
   };
   var formatedUrl = url.format(urlObj);
   return formatedUrl;
-}
+};
+
+describe('lazyConnect', function() {
+  var getDS = function(myconfig) {
+    var db = new DataSource(mssqlConnector, myconfig);
+    return db;
+  };
+
+  it('should skip connect phase (lazyConnect = true)', function(done) {
+    var dsConfig = {
+      host: 'invalid-hostname',
+      port: 80,
+      lazyConnect: true,
+    };
+    var ds = getDS(dsConfig);
+
+    var errTimeout = setTimeout(function() {
+      done();
+    }, 2000);
+    ds.on('error', function(err) {
+      clearTimeout(errTimeout);
+      done(err);
+    });
+  });
+
+  it('should report connection error (lazyConnect = false)', function(done) {
+    var dsConfig = {
+      host: 'invalid-hostname',
+      port: 80,
+      lazyConnect: false,
+    };
+    var ds = getDS(dsConfig);
+
+    ds.on('error', function(err) {
+      err.message.should.containEql('ENOTFOUND');
+      done();
+    });
+  });
+});
