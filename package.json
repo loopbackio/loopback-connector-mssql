@@ -1,6 +1,6 @@
 {
   "name": "loopback-connector-mssql",
-  "version": "1.5.1",
+  "version": "2.6.0",
   "description": "Microsoft SQL Server connector for LoopBack",
   "keywords": [
     "StrongLoop",
@@ -13,30 +13,29 @@
   ],
   "main": "index.js",
   "dependencies": {
-    "async": "^0.9.0",
+    "async": "^1.5.2",
     "debug": "^2.1.1",
-    "loopback-connector": "1.x",
-    "mssql": "^2.1.0"
+    "loopback-connector": "^2.1.0",
+    "mssql": "^3.1.1"
   },
+  "bundledDependencies": [
+    "mssql"
+  ],
   "devDependencies": {
-    "bluebird": "^2.9.12",
-    "loopback-datasource-juggler": "2.x",
+    "bluebird": "^3.3.3",
+    "loopback-datasource-juggler": "^2.28.0",
     "mocha": "^2.1.0",
-    "rc": "^0.6.0",
-    "should": "^5.0.0"
+    "rc": "^1.0.0",
+    "should": "^8.0.2",
+    "sinon": "^1.15.4"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha --timeout 5000 -R spec"
+    "test": "./node_modules/.bin/mocha --timeout 5000 -R spec",
+    "prepublish": "node remove-regenerator.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/strongloop/loopback-connector-mssql.git"
   },
-  "license": {
-    "name": "StrongLoop",
-    "url": "https://github.com/strongloop/loopback-connector-mssql/blob/master/LICENSE"
-  },
-  "optionalDependencies": {
-    "sl-blip": "http://blip.strongloop.com/loopback-connector-mssql@1.5.1"
-  }
+  "license": "SEE LICENSE IN LICENSE.md"
 }

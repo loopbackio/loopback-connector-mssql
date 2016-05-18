@@ -36,7 +36,18 @@ To use it you need `loopback-datasource-juggler`.
             port: 1433,
             database: 'mydb',
             username: 'myuser',
-            password: 'mypass'
+            password: 'mypass',
+            
+            // You need this if using Microsoft Azure SQL database
+            // options: { encrypt: true }
         });
     ```
 
+## Running tests
+
+The tests in this repository are mainly integration tests, meaning you will need
+to run them using our preconfigured test server.
+
+1. Ask a core developer for instructions on how to set up test server
+   credentials on your machine
+2. `npm test`

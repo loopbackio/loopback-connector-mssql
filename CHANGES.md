@@ -1,4 +1,105 @@
-2015-03-03, Version 1.5.1
+2016-03-16, Version 2.6.0
+=========================
+
+ * Remove regenerator from babel-runtime and bundle mssql (Raymond Feng)
+
+
+2016-03-10, Version 2.5.1
+=========================
+
+ * Remove the license check (Raymond Feng)
+
+
+2016-03-04, Version 2.5.0
+=========================
+
+
+
+2016-02-19, Version 2.4.1
+=========================
+
+ * Remove sl-blip from dependencies (Miroslav Bajtoš)
+
+
+2016-02-09, Version 2.4.0
+=========================
+
+ * Refactor Fix for Insert into Table with Active Trigger by getting the column data type instead of varchar. https://github.com/strongloop/loopback-connector-mssql/issues/21 (FoysalOsmany)
+
+ * Fix for Insert into Table with Active Trigger https://github.com/strongloop/loopback-connector-mssql/issues/21 (FoysalOsmany)
+
+ * Upgrade should to 8.0.2 (Simon Ho)
+
+ * Add help for Azure SQL users (Oleksandr Sochka)
+
+
+2015-11-27, Version 2.3.3
+=========================
+
+ * Remove buildPartitionBy() that became redundant (eugene-frb)
+
+ * Updated option that triggers PARTITION BY injection, fixed buildPartitionByFirst's 'where' argument. (eugene-frb)
+
+
+2015-11-18, Version 2.3.2
+=========================
+
+ * Inject Partition By clause into buildColumnNames of SQL query for include filter (eugene-frb)
+
+ * Refer to licenses with a link (Sam Roberts)
+
+ * Use strongloop conventions for licensing (Sam Roberts)
+
+
+2015-09-11, Version 2.3.1
+=========================
+
+ * Allow models without PK (Raymond Feng)
+
+
+2015-08-14, Version 2.3.0
+=========================
+
+ * Added support to unicode (Ahmed Abdul Moniem)
+
+
+2015-08-13, Version 2.2.1
+=========================
+
+ * Allow the `multipleResultSets` flag for execute (Raymond Feng)
+
+
+2015-07-29, Version 2.2.0
+=========================
+
+ * Add support for regex operator (Simon Ho)
+
+
+2015-05-18, Version 2.1.0
+=========================
+
+ * Update deps (Raymond Feng)
+
+ * Add transaction support (Raymond Feng)
+
+
+2015-05-13, Version 2.0.0
+=========================
+
+ * Update deps (Raymond Feng)
+
+ * Refactor the mssql connector to use base SqlConnector (Raymond Feng)
+
+ * Use SET IDENTITY_INSERT option to allow explicit id (Raymond Feng)
+
+ * Return count when updating or deleting models (Simon Ho)
+
+ * Add strongloop license check (Raymond Feng)
+
+ * Add "Running tests" section to readme (Simon Ho)
+
+
+2015-03-02, Version 1.5.1
 =========================
 
  * Test if the id is generated (Raymond Feng)

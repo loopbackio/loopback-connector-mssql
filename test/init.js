@@ -22,7 +22,12 @@ global.getConfig = function (options) {
     port: config.port || 1433,
     database: config.database || 'test',
     user: config.user || config.username,
-    password: config.password
+    password: config.password,
+    pool: {
+      max: 10,
+      min: 0,
+      idleTimeoutMillis: 30000
+    }
   };
 
   if (options) {
@@ -39,4 +44,4 @@ global.getDataSource = global.getSchema = function (options) {
   return db;
 };
 
-
+global.sinon = require('sinon');
