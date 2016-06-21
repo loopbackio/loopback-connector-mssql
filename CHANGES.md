@@ -1,3 +1,19 @@
+2016-06-21, Version 2.8.0
+=========================
+
+ * update copyright notices and license (Ryan Graham)
+
+ * Lazy connect when booting app (juehou)
+
+ * Add feature/eslint (Amir-61)
+
+ * Fix linting errors (Amir Jafarian)
+
+ * Auto-update by eslint --fix (Amir Jafarian)
+
+ * Add eslint infrastructure (Amir Jafarian)
+
+
 2016-04-07, Version 2.7.1
 =========================
 
