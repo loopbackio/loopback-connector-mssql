@@ -3,6 +3,7 @@
 // US Government Users Restricted Rights - Use, duplication or disclosure
 // restricted by GSA ADP Schedule Contract with IBM Corp.
 
+'use strict';
 process.env.NODE_ENV = 'test';
 require('./init.js');
 require('should');
@@ -122,7 +123,7 @@ describe('Discover model primary keys', function() {
   });
 
   it('should return an array of primary keys for dbo.product', function(done) {
-    db.discoverPrimaryKeys('product', { owner: 'dbo' }, function(err, models) {
+    db.discoverPrimaryKeys('product', {owner: 'dbo'}, function(err, models) {
       if (err) {
         console.error(err);
         done(err);
@@ -153,7 +154,7 @@ describe('Discover model foreign keys', function() {
     });
   });
   it('should return an array of foreign keys for dbo.inventory', function(done) {
-    db.discoverForeignKeys('inventory', { owner: 'dbo' }, function(err, models) {
+    db.discoverForeignKeys('inventory', {owner: 'dbo'}, function(err, models) {
       if (err) {
         console.error(err);
         done(err);
@@ -170,7 +171,7 @@ describe('Discover model foreign keys', function() {
 
 describe('Discover adl schema from a table', function() {
   it('should return an adl schema for inventory', function(done) {
-    db.discoverSchema('inventory', { owner: 'dbo' }, function(err, schema) {
+    db.discoverSchema('inventory', {owner: 'dbo'}, function(err, schema) {
       // console.log('%j', schema);
       assert(schema.name === 'Inventory');
       assert(schema.options.mssql.schema === 'dbo');

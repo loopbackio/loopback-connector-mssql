@@ -6,6 +6,7 @@
 /**
  * This script removes regenerator bundled with babel-runtime
  */
+'use strict';
 var fs = require('fs');
 try {
   var index = require.resolve('babel-runtime/regenerator/index.js');

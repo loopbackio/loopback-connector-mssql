@@ -3,6 +3,7 @@
 // US Government Users Restricted Rights - Use, duplication or disclosure
 // restricted by GSA ADP Schedule Contract with IBM Corp.
 
+'use strict';
 var jdb = require('loopback-datasource-juggler');
 var commonTest = jdb.test;
 
@@ -26,12 +27,12 @@ commonTest.it('should automigrate', function(test) {
 
 commonTest.it('should be able to ORDER results', function(test) {
   var titles = [
-    { title: 'Title A', subject: 'B' },
-    { title: 'Title Z', subject: 'A' },
-    { title: 'Title M', subject: 'C' },
-    { title: 'Title A', subject: 'A' },
-    { title: 'Title B', subject: 'A' },
-    { title: 'Title C', subject: 'D' },
+    {title: 'Title A', subject: 'B'},
+    {title: 'Title Z', subject: 'A'},
+    {title: 'Title M', subject: 'C'},
+    {title: 'Title A', subject: 'A'},
+    {title: 'Title B', subject: 'A'},
+    {title: 'Title C', subject: 'D'},
   ];
 
   var dates = [
@@ -44,7 +45,7 @@ commonTest.it('should be able to ORDER results', function(test) {
   ];
 
   titles.forEach(function(t, i) {
-    schema.models.Post.create({ title: t.title, subject: t.subject, date: dates[i] }, done);
+    schema.models.Post.create({title: t.title, subject: t.subject, date: dates[i]}, done);
   });
   var i = 0;
   var tests = 0;
@@ -67,7 +68,7 @@ commonTest.it('should be able to ORDER results', function(test) {
 
   function doStringTest() {
     tests += 1;
-    schema.models.Post.all({ order: 'title' }, function(err, posts) {
+    schema.models.Post.all({order: 'title'}, function(err, posts) {
       if (err) console.log(err);
       test.equal(posts.length, 6);
       titles.sort(compare).forEach(function(t, i) {
@@ -79,7 +80,7 @@ commonTest.it('should be able to ORDER results', function(test) {
 
   function doNumberTest() {
     tests += 1;
-    schema.models.Post.all({ order: 'date' }, function(err, posts) {
+    schema.models.Post.all({order: 'date'}, function(err, posts) {
       if (err) console.log(err);
       test.equal(posts.length, 6);
       dates.sort(numerically).forEach(function(d, i) {
@@ -92,7 +93,7 @@ commonTest.it('should be able to ORDER results', function(test) {
 
   function doFilterAndSortTest() {
     tests += 1;
-    schema.models.Post.all({ where: { date: new Date(1000 * 9) }, order: 'title', limit: 3 }, function(err, posts) {
+    schema.models.Post.all({where: {date: new Date(1000 * 9)}, order: 'title', limit: 3}, function(err, posts) {
       if (err) console.log(err);
       console.log(posts.length);
       test.equal(posts.length, 2, 'Exactly 2 posts returned by query');
@@ -107,7 +108,7 @@ commonTest.it('should be able to ORDER results', function(test) {
 
   function doFilterAndSortReverseTest() {
     tests += 1;
-    schema.models.Post.all({ where: { date: new Date(1000 * 9) }, order: 'title DESC', limit: 3 },
+    schema.models.Post.all({where: {date: new Date(1000 * 9)}, order: 'title DESC', limit: 3},
     function(err, posts) {
       if (err) console.log(err);
       test.equal(posts.length, 2, 'Exactly 2 posts returned by query');
@@ -122,7 +123,7 @@ commonTest.it('should be able to ORDER results', function(test) {
 
   function doMultipleSortTest() {
     tests += 1;
-    schema.models.Post.all({ order: 'title ASC, subject ASC' }, function(err, posts) {
+    schema.models.Post.all({order: 'title ASC, subject ASC'}, function(err, posts) {
       if (err) console.log(err);
       test.equal(posts.length, 6);
       test.equal(posts[0].title, 'Title A');
@@ -136,7 +137,7 @@ commonTest.it('should be able to ORDER results', function(test) {
 
   function doMultipleReverseSortTest() {
     tests += 1;
-    schema.models.Post.all({ order: 'title ASC, subject DESC' }, function(err, posts) {
+    schema.models.Post.all({order: 'title ASC, subject DESC'}, function(err, posts) {
       if (err) console.log(err);
       test.equal(posts.length, 6);
       test.equal(posts[0].title, 'Title A');
@@ -164,7 +165,7 @@ commonTest.it('should be able to ORDER results', function(test) {
 
 commonTest.it('should count posts', function(test) {
   test.expect(2);
-  schema.models.Post.count({ title: 'Title A' }, function(err, cnt) {
+  schema.models.Post.count({title: 'Title A'}, function(err, cnt) {
     test.ifError(err);
     test.equal(cnt, 2);
     test.done();
@@ -226,7 +227,7 @@ commonTest.it('should support custom primary key', function(test) {
 
   schema.automigrate(function(err) {
     test.ifError(err);
-    AppliesTo.create({ Title: 'custom key', Identifier: 'ck', Editable: false }, function(err, data) {
+    AppliesTo.create({Title: 'custom key', Identifier: 'ck', Editable: false}, function(err, data) {
       test.ifError(err);
       test.notStrictEqual(typeof data.AppliesToID, 'undefined');
       test.done();

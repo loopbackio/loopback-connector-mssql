@@ -3,6 +3,7 @@
 // US Government Users Restricted Rights - Use, duplication or disclosure
 // restricted by GSA ADP Schedule Contract with IBM Corp.
 
+'use strict';
 require('./init.js');
 var should = require('should');
 var assert = require('assert');
@@ -48,19 +49,19 @@ describe('Manipulating id column', function() {
           Model.destroyAll(callback);
         },
         function(callback) {
-          Model.create({ name: 'w1' },
+          Model.create({name: 'w1'},
             callback);
         },
         function(callback) {
-          Model.create({ name: 'w2' },
+          Model.create({name: 'w2'},
             callback);
         },
         function(callback) {
-          Model.create({ name: 'w3' },
+          Model.create({name: 'w3'},
             callback);
         },
         function(callback) {
-          Model.find({ order: 'id asc' },
+          Model.find({order: 'id asc'},
             function(err, results) {
               assert(!err);
               results.should.have.lengthOf(3);
@@ -110,11 +111,11 @@ describe('Manipulating id column', function() {
           Model.destroyAll(callback);
         },
         function(callback) {
-          Model.create({ id: 501, name: 'w1' },
+          Model.create({id: 501, name: 'w1'},
             callback);
         },
         function(callback) {
-          Model.find({ order: 'id asc' },
+          Model.find({order: 'id asc'},
             function(err, results) {
               assert(!err);
               results.should.have.lengthOf(1);
@@ -167,11 +168,11 @@ describe('Manipulating id column', function() {
           Model.destroyAll(callback);
         },
         function(callback) {
-          Model.create({ id: 962744456683738, name: 'w1' },
+          Model.create({id: 962744456683738, name: 'w1'},
             callback);
         },
         function(callback) {
-          Model.find({ order: 'id asc' },
+          Model.find({order: 'id asc'},
             function(err, results) {
               assert(!err);
               results.should.have.lengthOf(1);

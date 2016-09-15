@@ -3,13 +3,14 @@
 // US Government Users Restricted Rights - Use, duplication or disclosure
 // restricted by GSA ADP Schedule Contract with IBM Corp.
 
+'use strict';
 module.exports = require('should');
 
 var DataSource = require('loopback-datasource-juggler').DataSource;
 
 var config = {};
 try {
-  config = require('rc')('loopback', { test: { mssql: {}}}).test.mssql;
+  config = require('rc')('loopback', {test: {mssql: {}}}).test.mssql;
 } catch (err) {
   config = {
     user: 'demo',
