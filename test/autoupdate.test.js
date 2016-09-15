@@ -3,6 +3,7 @@
 // US Government Users Restricted Rights - Use, duplication or disclosure
 // restricted by GSA ADP Schedule Contract with IBM Corp.
 
+'use strict';
 require('./init.js');
 var assert = require('assert');
 var ds;
@@ -140,4 +141,3 @@ describe('MS SQL server connector', function() {
     });
   });
 });
-

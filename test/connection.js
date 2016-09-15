@@ -4,6 +4,7 @@
 // restricted by GSA ADP Schedule Contract with IBM Corp.
 
 /* eslint-env node, mocha */
+'use strict';
 require('./init.js');
 var assert = require('assert');
 var DataSource = require('loopback-datasource-juggler').DataSource;
@@ -46,7 +47,7 @@ function generateURL(config) {
     hostname: config.host,
     port: config.port,
     pathname: config.database,
-    query: { encrypt: true },
+    query: {encrypt: true},
     slashes: true,
   };
   var formatedUrl = url.format(urlObj);
