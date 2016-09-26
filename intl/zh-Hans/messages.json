@@ -1,0 +1,7 @@
+{
+  "6ce5c3a3d305e965ff06e2b3e16e1252": "{{options}} 必须为 {{object}}：{0}",
+  "a0078d732b2dbabf98ed2efcdb55b402": "{{table}} 是必需的字符串自变量：{0}",
+  "80a32e80cbed65eba2103201a7c94710": "找不到模型：{0}",
+  "9dca910dae94ac66098b3992911e1b23": "{{Microsoft SQL Server}} 不支持正则表达式运算符"
+}
+

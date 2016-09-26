@@ -1,0 +1,7 @@
+{
+  "6ce5c3a3d305e965ff06e2b3e16e1252": "{{options}}이(가) {{object}}이어야 함: {0}",
+  "a0078d732b2dbabf98ed2efcdb55b402": "{{table}}은 필수 문자열 인수임: {0}",
+  "80a32e80cbed65eba2103201a7c94710": "모델을 찾을 수 없음: {0}",
+  "9dca910dae94ac66098b3992911e1b23": "{{Microsoft SQL Server}}에서 정규식 연산자를 지원하지 않음"
+}
+

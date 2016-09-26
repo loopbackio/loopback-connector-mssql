@@ -1,0 +1,7 @@
+{
+  "6ce5c3a3d305e965ff06e2b3e16e1252": "{{options}} moet een {{object}} zijn: {0}",
+  "a0078d732b2dbabf98ed2efcdb55b402": "{{table}} is een verplicht tekenreeksargument: {0}",
+  "80a32e80cbed65eba2103201a7c94710": "Model is niet gevonden: {0}",
+  "9dca910dae94ac66098b3992911e1b23": "{{Microsoft SQL Server}} biedt geen ondersteuning voor de expressieoperator"
+}
+
