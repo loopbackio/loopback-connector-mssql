@@ -2,6 +2,6 @@
   "6ce5c3a3d305e965ff06e2b3e16e1252": "{{options}} は {{object}} でなければなりません: {0}",
   "a0078d732b2dbabf98ed2efcdb55b402": "{{table}} は必須のストリング引数です: {0}",
   "80a32e80cbed65eba2103201a7c94710": "モデルが見つかりません: {0}",
-  "9dca910dae94ac66098b3992911e1b23": "{{Microsoft SQL Server}} は正規表現演算子をサポートしません"
+  "9dca910dae94ac66098b3992911e1b23": "{{Microsoft SQL Server}} では正規表現演算子はサポートされません。"
 }
 
