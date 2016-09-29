@@ -1,6 +1,3 @@
-IF OBJECT_ID('dbo.inventory', 'U') IS NOT NULL
-DROP TABLE inventory;
-
 IF OBJECT_ID('dbo.reservation', 'U') IS NOT NULL
 DROP TABLE reservation;
 
@@ -15,6 +12,9 @@ DROP TABLE product;
 
 IF OBJECT_ID('dbo.session', 'U') IS NOT NULL
 DROP TABLE session;
+
+IF OBJECT_ID('dbo.version', 'U') IS NOT NULL
+DROP TABLE version;
 
 IF OBJECT_ID('sa.movies', 'U') IS NOT NULL
 DROP TABLE sa.movies;
@@ -95,6 +95,11 @@ GO
    (	id varchar(64) not null,
 	uid varchar(1024),
 	ttl integer
+   ) ;
+
+  create table version
+   (	product_id varchar(64) not null,
+	version integer not null
    ) ;
 
   create table movies
@@ -721,12 +726,13 @@ insert into product (id,name,audible_range,effective_range,rounds,extras,fire_mo
 insert into product (id,name,audible_range,effective_range,rounds,extras,fire_modes) values ('2','g17',53,75,15,'flashlight','single');
 insert into product (id,name,audible_range,effective_range,rounds,extras,fire_modes) values ('5','m9 sd',0,75,15,'silenced','single');
 
-  alter table inventory add primary key (id);
-  alter table location add primary key (id);
+  alter table inventory add constraint inventory_pk primary key (id);
+  alter table location add constraint location_pk primary key (id);
 
-  alter table customer add primary key (id);
-  alter table product add primary key (id);
-  alter table session add primary key (id);
+  alter table customer add constraint customer_pk primary key (id);
+  alter table product add constraint product_pk primary key (id);
+  alter table session add constraint session_pk primary key (id);
+  alter table version add constraint version_pk primary key (product_id, version);
 
   alter table inventory add constraint location_fk foreign key (location_id) references location (id);
   alter table inventory add constraint product_fk foreign key (product_id) references product (id);
@@ -734,6 +740,7 @@ insert into product (id,name,audible_range,effective_range,rounds,extras,fire_mo
   alter table reservation add constraint reservation_customer_fk foreign key (customer_id) references customer (id);
   alter table reservation add constraint reservation_location_fk foreign key (location_id) references location (id);
   alter table reservation add constraint reservation_product_fk foreign key (product_id) references product (id);
+  alter table version add constraint version_product_fk foreign key (product_id) references product (id);
 
 GO
 
