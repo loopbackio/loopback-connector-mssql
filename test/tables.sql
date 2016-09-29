@@ -1,3 +1,6 @@
+IF OBJECT_ID('dbo.inventory', 'U') IS NOT NULL
+DROP TABLE inventory;
+
 IF OBJECT_ID('dbo.reservation', 'U') IS NOT NULL
 DROP TABLE reservation;
 
@@ -12,9 +15,6 @@ DROP TABLE product;
 
 IF OBJECT_ID('dbo.session', 'U') IS NOT NULL
 DROP TABLE session;
-
-IF OBJECT_ID('dbo.version', 'U') IS NOT NULL
-DROP TABLE version;
 
 IF OBJECT_ID('sa.movies', 'U') IS NOT NULL
 DROP TABLE sa.movies;
@@ -96,7 +96,7 @@ GO
 	uid varchar(1024),
 	ttl integer
    ) ;
-
+  
   create table version
    (	product_id varchar(64) not null,
 	version integer not null

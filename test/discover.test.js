@@ -148,6 +148,72 @@ describe('Discover model primary keys', function() {
       }
     });
   });
+
+  it('should return just the primary keys and not the foreign keys for inventory', function(done) {
+    db.discoverPrimaryKeys('inventory', function(err, models) {
+      if (err) {
+        console.error(err);
+        done(err);
+      } else {
+        models.forEach(function(m) {
+          // console.dir(m);
+          assert(m.tableName === 'inventory');
+          assert(m.columnName === 'id');
+          assert(m.pkName.match(/_pk$/));
+        });
+        done(null, models);
+      }
+    });
+  });
+
+  it('should return just the primary keys and not the foreign keys for dbo.inventory', function(done) {
+    db.discoverPrimaryKeys('inventory', {owner: 'dbo'}, function(err, models) {
+      if (err) {
+        console.error(err);
+        done(err);
+      } else {
+        models.forEach(function(m) {
+          // console.dir(m);
+          assert(m.tableName === 'inventory');
+          assert(m.columnName === 'id');
+          assert(m.pkName === 'inventory_pk');
+        });
+        done(null, models);
+      }
+    });
+  });
+  it('should return the primary key for version which consists of two columns', function(done) {
+    db.discoverPrimaryKeys('version', function(err, models) {
+      if (err) {
+        console.error(err);
+        done(err);
+      } else {
+        assert(models.length === 2);
+        models.forEach(function(m) {
+          // console.dir(m);
+          assert(m.tableName === 'version');
+          assert(m.pkName.match(/_pk$/));
+        });
+        done(null, models);
+      }
+    });
+  });
+  it('should return the primary key for dbo.version which consists of two columns', function(done) {
+    db.discoverPrimaryKeys('version', {owner: 'dbo'}, function(err, models) {
+      if (err) {
+        console.error(err);
+        done(err);
+      } else {
+        assert(models.length === 2);
+        models.forEach(function(m) {
+          // console.dir(m);
+          assert(m.tableName === 'version');
+          assert(m.pkName.match(/_pk$/));
+        });
+        done(null, models);
+      }
+    });
+  });
 });
 
 describe('Discover model foreign keys', function() {
