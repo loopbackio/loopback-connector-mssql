@@ -16,6 +16,9 @@ DROP TABLE product;
 IF OBJECT_ID('dbo.session', 'U') IS NOT NULL
 DROP TABLE session;
 
+IF OBJECT_ID('dbo.version', 'U') IS NOT NULL
+DROP TABLE version;
+
 IF OBJECT_ID('sa.movies', 'U') IS NOT NULL
 DROP TABLE sa.movies;
 
