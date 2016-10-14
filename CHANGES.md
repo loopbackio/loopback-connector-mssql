@@ -1,3 +1,27 @@
+2016-10-14, Version 2.9.0
+=========================
+
+ * Add connectorCapabilities global object (#102) (Nicholas Duffy)
+
+ * Update translation files - round#2 (Candy)
+
+ * Add translated files (gunjpan)
+
+ * Update deps to loopback 3.0.0 RC (Miroslav Bajtoš)
+
+ * Update eslint infrastructure (Loay)
+
+ * Use juggler@3 for running tests (Simon Ho)
+
+ * Add globalization (Candy)
+
+ * Revert "Update Fix" (Loay)
+
+ * Update Fix (Loay)
+
+ * Update URLs in CONTRIBUTING.md (#88) (Ryan Graham)
+
+
 2016-06-21, Version 2.8.0
 =========================
 
