@@ -247,6 +247,43 @@ describe('Discover model foreign keys', function() {
   });
 });
 
+describe('Discover model generated columns', function() {
+  it('should return an array of columns for product and none of them is generated', function(done) {
+    db.discoverModelProperties('product', function(err, models) {
+      if (err) {
+        console.error(err);
+        done(err);
+      } else {
+        models.forEach(function(m) {
+          // console.dir(m);
+          assert(m.tableName === 'product');
+          assert(!m.generated, 'product table should not have generated (identity) columns');
+
+        });
+        done(null, models);
+      }
+    });
+  });
+  it('should return an array of columns for testgen and the first is generated', function(done) {
+    db.discoverModelProperties('testgen', function(err, models) {
+      if (err) {
+        console.error(err);
+        done(err);
+      } else {
+        models.forEach(function(m) {
+          // console.dir(m);
+          assert(m.tableName === 'testgen');
+          if (m.columnName === 'id') {
+            assert(m.generated, 'testgen.id should be a generated (identity) column');
+          }
+        });
+        done(null, models);
+      }
+    });
+  });
+});
+
+
 describe('Discover adl schema from a table', function() {
   it('should return an adl schema for inventory', function(done) {
     db.discoverSchema('inventory', {owner: 'dbo'}, function(err, schema) {
