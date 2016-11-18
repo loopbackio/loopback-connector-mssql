@@ -1,6 +1,9 @@
 {
   "name": "loopback-connector-mssql",
   "version": "2.9.0",
+  "publishConfig": {
+    "tag": "lts"
+  },
   "description": "Microsoft SQL Server connector for LoopBack",
   "keywords": [
     "StrongLoop",
