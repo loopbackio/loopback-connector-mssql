@@ -1,6 +1,9 @@
 {
   "name": "loopback-connector-mssql",
   "version": "2.9.0",
+  "publishConfig": {
+    "tag": "lts"
+  },
   "description": "Microsoft SQL Server connector for LoopBack",
   "keywords": [
     "StrongLoop",
@@ -26,7 +29,7 @@
     "bluebird": "^3.3.3",
     "eslint": "^2.13.1",
     "eslint-config-loopback": "^4.0.0",
-    "loopback-datasource-juggler": "^3.0.0",
+    "loopback-datasource-juggler": "^2.53.0",
     "mocha": "^2.1.0",
     "rc": "^1.0.0",
     "should": "^8.0.2",
