@@ -14,6 +14,8 @@ before(function() {
 
 describe('MS SQL server connector', function() {
   it('should auto migrate/update tables', function(done) {
+    this.timeout(30000);
+
     /* eslint-disable camelcase */
     var schema_v1 =
       {
