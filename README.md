@@ -4,10 +4,8 @@
 The `loopback-connector-mssql` module is the Microsoft SQL Server connector for the LoopBack framework.
 
 <div class="gh-only">
-For more information, see [LoopBack documentation | SQL Server Connector](http://loopback.io/doc/en/lb3/SQL-Server-connector.html).
+For more information, see <a href="http://loopback.io/doc/en/lb3/SQL-Server-connector.html">LoopBack documentation</a>.
 </div>
-
-If you create a SQL Server data source using the data source generator as described below, you don't have to do this, since the generator will run `npm install` for you.
 
 ## Installation
 
@@ -18,6 +16,8 @@ $ npm install loopback-connector-mssql --save
 ```
 
 This will install the module from npm and add it as a dependency to the application's `package.json` file.
+
+If you create a SQL Server data source using the data source generator as described below, you don't have to do this, since the generator will run `npm install` for you.
 
 ## Creating a SQL Server data source
 
