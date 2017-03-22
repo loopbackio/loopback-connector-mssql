@@ -153,7 +153,7 @@ describe('Discover model primary keys', function() {
   it('should return the primary key for version which consists of two columns', function(done) {
     db.discoverPrimaryKeys('version', function(err, models) {
       if (err) return done(err);
-      assert(models.length === 2);
+      assert.equal(models.length,  2);
       models.forEach(function(m) {
         // console.dir(m);
         assert.equal(m.tableName, 'version');
@@ -165,7 +165,7 @@ describe('Discover model primary keys', function() {
   it('should return the primary key for dbo.version which consists of two columns', function(done) {
     db.discoverPrimaryKeys('version', {owner: 'dbo'}, function(err, models) {
       if (err) return done(err);
-      assert(models.length === 2);
+      assert.equal(models.length,  2);
       models.forEach(function(m) {
         // console.dir(m);
         assert.equal(m.tableName, 'version');
