@@ -94,7 +94,7 @@ describe('Discover model properties', function() {
         if (err) return done(err);
         models.forEach(function(m) {
           // console.dir(m);
-          assert.equal(m.tableName === 'product');
+          assert.equal(m.tableName, 'product');
         });
         done();
       });
@@ -108,7 +108,7 @@ describe('Discover model primary keys', function() {
       if (err) return done(err);
       models.forEach(function(m) {
         // console.dir(m);
-        assert.equal(m.tableName === 'product');
+        assert.equal(m.tableName, 'product');
       });
       done();
     });
@@ -119,7 +119,7 @@ describe('Discover model primary keys', function() {
       if (err) return done(err);
       models.forEach(function(m) {
         // console.dir(m);
-        assert.equal(m.tableName === 'product');
+        assert.equal(m.tableName, 'product');
       });
       done();
     });
@@ -130,8 +130,8 @@ describe('Discover model primary keys', function() {
       if (err) return done(err);
       models.forEach(function(m) {
         // console.dir(m);
-        assert.equal(m.tableName === 'inventory');
-        assert.equal(m.columnName === 'id');
+        assert.equal(m.tableName, 'inventory');
+        assert.equal(m.columnName, 'id');
         assert(m.pkName.match(/_pk$/));
       });
       done();
@@ -143,9 +143,9 @@ describe('Discover model primary keys', function() {
       if (err) return done(err);
       models.forEach(function(m) {
         // console.dir(m);
-        assert.equal(m.tableName === 'inventory');
-        assert.equal(m.columnName === 'id');
-        assert.equal(m.pkName === 'inventory_pk');
+        assert.equal(m.tableName, 'inventory');
+        assert.equal(m.columnName, 'id');
+        assert.equal(m.pkName, 'inventory_pk');
       });
       done();
     });
@@ -156,7 +156,7 @@ describe('Discover model primary keys', function() {
       assert(models.length === 2);
       models.forEach(function(m) {
         // console.dir(m);
-        assert.equal(m.tableName === 'version');
+        assert.equal(m.tableName, 'version');
         assert(m.pkName.match(/_pk$/));
       });
       done();
@@ -168,7 +168,7 @@ describe('Discover model primary keys', function() {
       assert(models.length === 2);
       models.forEach(function(m) {
         // console.dir(m);
-        assert.equal(m.tableName === 'version');
+        assert.equal(m.tableName, 'version');
         assert(m.pkName.match(/_pk$/));
       });
       done();
@@ -182,7 +182,7 @@ describe('Discover model foreign keys', function() {
       if (err) return done(err);
       models.forEach(function(m) {
         // console.dir(m);
-        assert.equal(m.fkTableName === 'inventory');
+        assert.equal(m.fkTableName, 'inventory');
       });
       done();
     });
@@ -192,7 +192,7 @@ describe('Discover model foreign keys', function() {
       if (err) return done(err);
       models.forEach(function(m) {
         // console.dir(m);
-        assert.equal(m.fkTableName === 'inventory');
+        assert.equal(m.fkTableName, 'inventory');
       });
       done();
     });
@@ -205,7 +205,7 @@ describe('Discover model generated columns', function() {
       if (err) return done(err);
       models.forEach(function(m) {
         // console.dir(m);
-        assert.equal(m.tableName === 'product');
+        assert.equal(m.tableName, 'product');
         assert(!m.generated, 'product table should not have generated (identity) columns');
 
       });
@@ -217,7 +217,7 @@ describe('Discover model generated columns', function() {
       if (err) return done(err);
       models.forEach(function(m) {
         // console.dir(m);
-        assert.equal(m.tableName === 'testgen');
+        assert.equal(m.tableName, 'testgen');
         if (m.columnName === 'id') {
           assert(m.generated, 'testgen.id should be a generated (identity) column');
         }
