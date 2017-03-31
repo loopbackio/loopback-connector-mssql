@@ -1,3 +1,39 @@
+2017-03-31, Version 3.0.0
+=========================
+
+ * Replicate issue_template from loopback repo (#120) (siddhipai)
+
+ * Refactor alter table (#134) (Diana Lau)
+
+ * Upgrade to loopback-connector@4.x (Loay)
+
+ * Refactor migration methods (ssh24)
+
+ * Refactor discovery methods (Loay Gewily)
+
+ * Update mocha timeout (Loay Gewily)
+
+ * Update LB-connector version (Loay)
+
+ * Add buildreplace method (Loay Gewily)
+
+ * Update README.md (#117) (Rand McKinney)
+
+ * Update w info from docs (#115) (Rand McKinney)
+
+ * Update paid support URL (Siddhi Pai)
+
+ * increase the timeout for autoupdate test (Eddie Monge)
+
+ * Start 3.x + drop support for Node v0.10/v0.12 (siddhipai)
+
+ * Drop support for Node v0.10 and v0.12 (Siddhi Pai)
+
+ * Start the development of the next major version (Siddhi Pai)
+
+ * Update README doc links (Candy)
+
+
 2016-10-14, Version 2.9.0
 =========================
 
