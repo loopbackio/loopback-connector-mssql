@@ -1,0 +1,21 @@
+environment:
+  matrix:
+    - nodejs_version: '7'
+    - nodejs_version: '6'
+    - nodejs_version: '4'
+services: mssql2012sp1
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - set CI=true
+  - set PATH=%APPDATA%\npm;%PATH%
+  - npm install
+matrix:
+  fast_finish: true
+build: off
+skip_branch_with_pr: true
+version: '{build}'
+shallow_clone: true
+clone_depth: 1
+test_script:
+  - sqlcmd -S "(local)\SQL2012SP1" -U "sa" -P "Password12!" -d "master" -i "test\\tables.sql"
+  - npm test

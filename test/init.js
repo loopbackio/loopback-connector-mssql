@@ -21,6 +21,16 @@ try {
   };
 }
 
+if (process.env.APPVEYOR) {
+  config = {
+    host: 'localhost',
+    port: 1433,
+    database: 'master',
+    user: 'sa',
+    password: 'Password12!',
+  };
+}
+
 global.getConfig = function(options) {
   var dbConf = {
     host: config.host || config.hostname || config.server || 'localhost',

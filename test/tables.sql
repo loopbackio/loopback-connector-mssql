@@ -712,4 +712,3 @@ insert into product (id,name,audible_range,effective_range,rounds,extras,fire_mo
     where p.id = i.product_id
     and l.id   = i.location_id;
 
-

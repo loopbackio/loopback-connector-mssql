@@ -87,6 +87,7 @@ describe('Discover models including other users', function() {
         var others = false;
         models.forEach(function(m) {
           // console.dir(m);
+          console.log('Model owner: ' + m.owner + '->' + JSON.stringify(m));
           if (m.owner !== 'dbo') {
             others = true;
           }
@@ -125,6 +126,7 @@ describe('Discover model primary keys', function() {
         done(err);
       } else {
         models.forEach(function(m) {
+          console.log('Model tables: ' + m.tableName);
           // console.dir(m);
           assert(m.tableName === 'product');
         });
