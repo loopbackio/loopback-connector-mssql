@@ -7,6 +7,12 @@ drop table session;
 
 go
 
+  CREATE SCHEMA sa;
+
+go
+
+go
+
   create table customer
    (	id varchar(64) not null,
 	username varchar(1024),
@@ -68,6 +74,14 @@ go
 	uid varchar(1024),
 	ttl integer
    ) ;
+
+  create table movies
+   (	id varchar(64) not null,
+	name varchar(1024),
+	year integer
+   ) ;
+
+  ALTER SCHEMA sa TRANSFER dbo.movies
 
 insert into customer (id,[username],email,password,name,military_agency,realm,emailverified,verificationtoken,credentials,challenges,status,created,lastupdated) values ('612','bat','bat@bar.com','$2a$10$beg18wcyqn7trkfic59eb.vmnsewqjwmlym4dng73izb.mka1rjac',null,null,null,null,null,']',']',null,null,null);
 insert into customer (id,username,email,password,name,military_agency,realm,emailverified,verificationtoken,credentials,challenges,status,created,lastupdated) values ('613','baz','baz@bar.com','$2a$10$jksyf2glmdi4cwvqh8astos0b24ldu9p8jccnmri/0rvhtwsicm9c',null,null,null,null,null,']',']',null,null,null);
@@ -701,7 +715,7 @@ insert into product (id,name,audible_range,effective_range,rounds,extras,fire_mo
 
   go
 
-  ﻿create view inventory_view
+  create view inventory_view
                   as
     select p.name as product,
       l.name      as location,
@@ -711,4 +725,4 @@ insert into product (id,name,audible_range,effective_range,rounds,extras,fire_mo
       location l
     where p.id = i.product_id
     and l.id   = i.location_id;
-
+    
