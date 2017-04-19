@@ -11,8 +11,6 @@ go
 
 go
 
-go
-
   create table customer
    (	id varchar(64) not null,
 	username varchar(1024),

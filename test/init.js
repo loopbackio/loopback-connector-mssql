@@ -21,23 +21,13 @@ try {
   };
 }
 
-if (process.env.APPVEYOR) {
-  config = {
-    host: 'localhost',
-    port: 1433,
-    database: 'master',
-    user: 'sa',
-    password: 'Password12!',
-  };
-}
-
 global.getConfig = function(options) {
   var dbConf = {
-    host: config.host || config.hostname || config.server || 'localhost',
-    port: config.port || 1433,
-    database: config.database || 'test',
-    user: config.user || config.username,
-    password: config.password,
+    host: process.env.MSSQL_HOST || config.host || config.hostname || config.server || 'localhost',
+    port: process.env.MSSQL_PORT || config.port || 1433,
+    database: process.env.MSSQL_DATABASE || config.database || 'test',
+    user: process.env.MSSQL_USER || config.user || config.username,
+    password: process.env.MSSQL_PASSWORD || config.password,
     pool: {
       max: 10,
       min: 0,

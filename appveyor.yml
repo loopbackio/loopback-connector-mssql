@@ -3,6 +3,11 @@ environment:
     - nodejs_version: '7'
     - nodejs_version: '6'
     - nodejs_version: '4'
+  MSSQL_HOST: 'localhost'
+  MSSQL_PORT: 1433
+  MSSQL_USER: 'sa'
+  MSSQL_PASSWORD: 'Password12!'
+  MSSQL_DATABASE: 'master'
 services: mssql2012sp1
 install:
   - ps: Install-Product node $env:nodejs_version
