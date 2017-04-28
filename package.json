@@ -20,7 +20,7 @@
     "debug": "^2.1.1",
     "loopback-connector": "^4.0.0",
     "mssql": "^4.0.4",
-    "strong-globalize": "^2.5.8"
+    "strong-globalize": "^2.5.8",
     "sqlcmdjs": "^1.5.0"
   },
   "bundledDependencies": [

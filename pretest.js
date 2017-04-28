@@ -6,7 +6,7 @@ var init = require(path.resolve(__dirname, 'test', 'init'));
 
 var isWin = (process.platform === 'win32');
 var sqlFileDir = path.resolve(__dirname, 'test', 'tables.sql');
-var sqlDependencyDir = path.resolve(__dirname, 'node_modules', 'sqlcmdjs', 'sqlcmd.js');
+var sqlDependencyDir = path.resolve(__dirname, 'node_modules', '.bin', 'sqlcmd');
 
 // since appveyor seeds its database on the fly, we do not need to seed the share the database
 if (process.env.APPVEYOR) return console.log('Not seeding DB with test db');
@@ -25,5 +25,5 @@ var sqlcmd = catFileCmd + ' | ' + sqlDependencyDir + ' -s ' + process.env.MSSQL_
 
 exec(sqlcmd, function(err, result) {
   if (err) return console.log('Database seeding failed.\n%s', err);
-  else console.log('Database successfully seeded.');
+  return console.log('Database successfully seeded.');
 });
