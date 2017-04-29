@@ -12,6 +12,7 @@ var async = require('async');
 var db;
 
 before(function() {
+  /* global getDataSource */
   db = getDataSource();
 });
 

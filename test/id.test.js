@@ -11,6 +11,7 @@ var async = require('async');
 var ds;
 
 before(function() {
+  /* global getDataSource */
   ds = getDataSource();
 });
 

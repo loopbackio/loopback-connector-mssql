@@ -11,6 +11,7 @@ var Post, PostWithUUID, PostWithStringId, db;
 
 describe('mssql connector', function() {
   before(function() {
+    /* global getDataSource */
     db = getDataSource();
 
     Post = db.define('PostWithBoolean', {
@@ -250,6 +251,7 @@ describe('mssql connector', function() {
       ], done);
     });
     beforeEach(function addSpy() {
+      /* global sinon */
       sinon.stub(console, 'warn');
     });
     afterEach(function removeSpy()  {

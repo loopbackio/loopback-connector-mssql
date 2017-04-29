@@ -9,15 +9,16 @@ var commonTest = jdb.test;
 
 require('./init');
 
-var schema = getSchema();
+/* global getDataSource */
+var schema = getDataSource();
 
-//run the tests exposed by jugglingdb
+// run the tests exposed by jugglingdb
 commonTest(module.exports, schema);
 
-//skip the order test from jugglingdb, it wasn't working right
+// skip the order test from jugglingdb, it wasn't working right
 commonTest.skip('should handle ORDER clause');
 
-//re-implement the order test as pretty much the same thing, but run an automigration beforehand
+// re-implement the order test as pretty much the same thing, but run an automigration beforehand
 commonTest.it('should automigrate', function(test) {
   schema.automigrate(function(err) {
     test.ifError(err);
@@ -180,7 +181,7 @@ commonTest.it('should delete a post', function(test) {
   }, function(err, posts) {
     test.ifError(err);
     test.equal(posts.length, 1);
-    id = posts[0].id;
+    var id = posts[0].id;
     posts[0].destroy(function(err) {
       test.ifError(err);
       schema.models.Post.find(id, function(err, post) {
@@ -204,7 +205,7 @@ commonTest.it('should delete all posts', function(test) {
   });
 });
 
-//custom primary keys not quite working :(, hopefully 1602 will implement that functionality in jugglingdb soon.
+// custom primary keys not quite working :(, hopefully 1602 will implement that functionality in jugglingdb soon.
 commonTest.it('should support custom primary key', function(test) {
   test.expect(3);
   var AppliesTo = schema.define('AppliesTo', {

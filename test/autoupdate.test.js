@@ -9,6 +9,7 @@ var assert = require('assert');
 var ds;
 
 before(function() {
+  /* global getDataSource */
   ds = getDataSource();
 });
 
