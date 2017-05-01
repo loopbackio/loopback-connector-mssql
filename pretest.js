@@ -16,8 +16,7 @@ if (!process.env.MSSQL_USER) process.env.MSSQL_USER = global.getConfig().user;
 if (!process.env.MSSQL_PASSWORD) process.env.MSSQL_PASSWORD = global.getConfig().password;
 if (!process.env.MSSQL_DATABASE) process.env.MSSQL_DATABASE = global.getConfig().database;
 
-var catFileCmd = 'cat ' + sqlFileDir;
-if (isWin) catFileCmd = 'type ' + sqlFileDir;
+var catFileCmd = (isWin ? 'type ' : 'cat ') + sqlFileDir;
 
 var sqlcmd = catFileCmd + ' | ' + sqlDependencyDir + ' -s ' + process.env.MSSQL_HOST + ' -o ' + process.env.MSSQL_PORT +
 ' -u ' + process.env.MSSQL_USER + ' -p ' + process.env.MSSQL_PASSWORD + ' -d ' + process.env.MSSQL_DATABASE;
