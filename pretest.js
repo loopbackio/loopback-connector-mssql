@@ -2,7 +2,6 @@
 
 var exec = require('child_process').exec;
 var path = require('path');
-var init = require(path.resolve(__dirname, 'test', 'init'));
 
 var isWin = (process.platform === 'win32');
 var sqlFileDir = path.resolve(__dirname, 'test', 'tables.sql');
@@ -11,11 +10,11 @@ var sqlDependencyDir = path.resolve(__dirname, 'node_modules', '.bin', 'sqlcmd')
 // since appveyor seeds its database on the fly, we do not need to seed the share the database
 if (process.env.APPVEYOR) return console.log('Not seeding DB with test db');
 
-if (!process.env.MSSQL_HOST) process.env.MSSQL_HOST = getConfig().host;
-if (!process.env.MSSQL_PORT) process.env.MSSQL_PORT = getConfig().port;
-if (!process.env.MSSQL_USER) process.env.MSSQL_USER = getConfig().user;
-if (!process.env.MSSQL_PASSWORD) process.env.MSSQL_PASSWORD = getConfig().password;
-if (!process.env.MSSQL_DATABASE) process.env.MSSQL_DATABASE = getConfig().database;
+if (!process.env.MSSQL_HOST) process.env.MSSQL_HOST = global.getConfig().host;
+if (!process.env.MSSQL_PORT) process.env.MSSQL_PORT = global.getConfig().port;
+if (!process.env.MSSQL_USER) process.env.MSSQL_USER = global.getConfig().user;
+if (!process.env.MSSQL_PASSWORD) process.env.MSSQL_PASSWORD = global.getConfig().password;
+if (!process.env.MSSQL_DATABASE) process.env.MSSQL_DATABASE = global.getConfig().database;
 
 var catFileCmd = 'cat ' + sqlFileDir;
 if (isWin) catFileCmd = 'type ' + sqlFileDir;
