@@ -10,6 +10,7 @@ require('should');
 
 var assert = require('assert');
 
+/* global getDataSource */
 var db = getDataSource();
 
 describe('discoverModels', function() {

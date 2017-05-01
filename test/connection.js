@@ -15,7 +15,6 @@ var config;
 
 before(function() {
   config = global.getConfig();
-  console.log('config', config);
 });
 
 describe('testConnection', function() {
