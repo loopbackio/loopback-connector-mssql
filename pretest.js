@@ -10,12 +10,6 @@ var sqlDependencyDir = path.resolve(__dirname, 'node_modules', '.bin', 'sqlcmd')
 // since appveyor seeds its database on the fly, we do not need to seed the share the database
 if (process.env.APPVEYOR) return console.log('Not seeding DB with test db');
 
-if (!process.env.MSSQL_HOST) process.env.MSSQL_HOST = global.getConfig().host;
-if (!process.env.MSSQL_PORT) process.env.MSSQL_PORT = global.getConfig().port;
-if (!process.env.MSSQL_USER) process.env.MSSQL_USER = global.getConfig().user;
-if (!process.env.MSSQL_PASSWORD) process.env.MSSQL_PASSWORD = global.getConfig().password;
-if (!process.env.MSSQL_DATABASE) process.env.MSSQL_DATABASE = global.getConfig().database;
-
 var catFileCmd = (isWin ? 'type ' : 'cat ') + sqlFileDir;
 
 var sqlcmd = catFileCmd + ' | ' + sqlDependencyDir + ' -s ' + process.env.MSSQL_HOST + ' -o ' + process.env.MSSQL_PORT +
