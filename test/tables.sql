@@ -1,15 +1,39 @@
-drop table customer;
-drop table location;
-drop table product;
-drop table inventory;
-drop table reservation;
-drop table session;
+IF OBJECT_ID('dbo.inventory', 'U') IS NOT NULL
+DROP TABLE inventory;
 
-go
+IF OBJECT_ID('dbo.reservation', 'U') IS NOT NULL
+DROP TABLE reservation;
 
-  CREATE SCHEMA sa;
+IF OBJECT_ID('dbo.customer', 'U') IS NOT NULL
+DROP TABLE customer;
 
-go
+IF OBJECT_ID('dbo.location', 'U') IS NOT NULL
+DROP TABLE location;
+
+IF OBJECT_ID('dbo.product', 'U') IS NOT NULL
+DROP TABLE product;
+
+IF OBJECT_ID('dbo.session', 'U') IS NOT NULL
+DROP TABLE session;
+
+IF OBJECT_ID('sa.movies', 'U') IS NOT NULL
+DROP TABLE sa.movies;
+
+IF OBJECT_ID('inventory_view','v') IS NOT NULL
+DROP VIEW inventory_view;
+
+GO
+
+  IF NOT EXISTS (
+    SELECT  schema_name
+    FROM    information_schema.schemata
+    WHERE   schema_name = 'sa' )
+ 
+  BEGIN
+    EXEC sp_executesql N'CREATE SCHEMA sa'
+  END
+
+GO
 
   create table customer
    (	id varchar(64) not null,
@@ -36,6 +60,18 @@ go
 	total integer
    ) ;
 
+  create table reservation
+   (	id varchar(64) not null,
+	product_id varchar(64),
+	location_id varchar(64),
+	customer_id varchar(64),
+	qty integer,
+	status varchar(20),
+	reserve_date date,
+	pickup_date date,
+	return_date date
+   ) ;
+
   create table location
    (	id varchar(64) not null,
 	street varchar(64),
@@ -55,18 +91,6 @@ go
 	fire_modes varchar(64)
    ) ;
 
-  create table reservation
-   (	id varchar(64) not null,
-	product_id varchar(64),
-	location_id varchar(64),
-	customer_id varchar(64),
-	qty integer,
-	status varchar(20),
-	reserve_date date,
-	pickup_date date,
-	return_date date
-   ) ;
-
   create table session
    (	id varchar(64) not null,
 	uid varchar(1024),
@@ -80,11 +104,6 @@ go
    ) ;
 
   ALTER SCHEMA sa TRANSFER dbo.movies
-
-insert into customer (id,[username],email,password,name,military_agency,realm,emailverified,verificationtoken,credentials,challenges,status,created,lastupdated) values ('612','bat','bat@bar.com','$2a$10$beg18wcyqn7trkfic59eb.vmnsewqjwmlym4dng73izb.mka1rjac',null,null,null,null,null,']',']',null,null,null);
-insert into customer (id,username,email,password,name,military_agency,realm,emailverified,verificationtoken,credentials,challenges,status,created,lastupdated) values ('613','baz','baz@bar.com','$2a$10$jksyf2glmdi4cwvqh8astos0b24ldu9p8jccnmri/0rvhtwsicm9c',null,null,null,null,null,']',']',null,null,null);
-insert into customer (id,username,email,password,name,military_agency,realm,emailverified,verificationtoken,credentials,challenges,status,created,lastupdated) values ('610','foo','foo@bar.com','$2a$10$tn1hn7xv6x74ccb7tvfwkeaajtd4/6q4rbcmzgmajewe40xqrrsui',null,null,null,null,null,']',']',null,null,null);
-insert into customer (id,username,email,password,name,military_agency,realm,emailverified,verificationtoken,credentials,challenges,status,created,lastupdated) values ('611','bar','bar@bar.com','$2a$10$a8mcol6d5vqxm6vubqxl8e5v66steg6e8vzjqqppoyk95vm3smpik',null,null,null,null,null,']',']',null,null,null);
 
 insert into inventory (id,product_id,location_id,available,total) values ('441','6','91',8,19);
 insert into inventory (id,product_id,location_id,available,total) values ('442','7','91',21,23);
@@ -603,6 +622,11 @@ insert into inventory (id,product_id,location_id,available,total) values ('438',
 insert into inventory (id,product_id,location_id,available,total) values ('439','4','91',56,97);
 insert into inventory (id,product_id,location_id,available,total) values ('440','5','91',20,30);
 
+insert into customer (id,[username],email,password,name,military_agency,realm,emailverified,verificationtoken,credentials,challenges,status,created,lastupdated) values ('612','bat','bat@bar.com','$2a$10$beg18wcyqn7trkfic59eb.vmnsewqjwmlym4dng73izb.mka1rjac',null,null,null,null,null,']',']',null,null,null);
+insert into customer (id,username,email,password,name,military_agency,realm,emailverified,verificationtoken,credentials,challenges,status,created,lastupdated) values ('613','baz','baz@bar.com','$2a$10$jksyf2glmdi4cwvqh8astos0b24ldu9p8jccnmri/0rvhtwsicm9c',null,null,null,null,null,']',']',null,null,null);
+insert into customer (id,username,email,password,name,military_agency,realm,emailverified,verificationtoken,credentials,challenges,status,created,lastupdated) values ('610','foo','foo@bar.com','$2a$10$tn1hn7xv6x74ccb7tvfwkeaajtd4/6q4rbcmzgmajewe40xqrrsui',null,null,null,null,null,']',']',null,null,null);
+insert into customer (id,username,email,password,name,military_agency,realm,emailverified,verificationtoken,credentials,challenges,status,created,lastupdated) values ('611','bar','bar@bar.com','$2a$10$a8mcol6d5vqxm6vubqxl8e5v66steg6e8vzjqqppoyk95vm3smpik',null,null,null,null,null,']',']',null,null,null);
+
 insert into location (id,street,city,zipcode,name,geo) values ('87','7153 east thomas road','scottsdale','85251','phoenix equipment rentals','-111.9271738,33.48034450000001');
 insert into location (id,street,city,zipcode,name,geo) values ('91','2799 broadway','new york','10025','cascabel armory','-73.9676965,40.8029807');
 insert into location (id,street,city,zipcode,name,geo) values ('89','1850 el camino real','menlo park','94027','military weaponry','-122.194253,37.459525');
@@ -697,21 +721,21 @@ insert into product (id,name,audible_range,effective_range,rounds,extras,fire_mo
 insert into product (id,name,audible_range,effective_range,rounds,extras,fire_modes) values ('2','g17',53,75,15,'flashlight','single');
 insert into product (id,name,audible_range,effective_range,rounds,extras,fire_modes) values ('5','m9 sd',0,75,15,'silenced','single');
 
-
-
-  alter table customer add primary key (id);
   alter table inventory add primary key (id);
   alter table location add primary key (id);
+
+  alter table customer add primary key (id);
   alter table product add primary key (id);
   alter table session add primary key (id);
+
   alter table inventory add constraint location_fk foreign key (location_id) references location (id);
-  alter table inventory add constraint product_fk foreign key (product_id)
-	  references product (id);
+  alter table inventory add constraint product_fk foreign key (product_id) references product (id);
+
   alter table reservation add constraint reservation_customer_fk foreign key (customer_id) references customer (id);
   alter table reservation add constraint reservation_location_fk foreign key (location_id) references location (id);
   alter table reservation add constraint reservation_product_fk foreign key (product_id) references product (id);
 
-  go
+GO
 
   create view inventory_view
                   as
@@ -723,4 +747,3 @@ insert into product (id,name,audible_range,effective_range,rounds,extras,fire_mo
       location l
     where p.id = i.product_id
     and l.id   = i.location_id;
-    

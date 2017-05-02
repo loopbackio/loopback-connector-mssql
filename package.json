@@ -20,7 +20,8 @@
     "debug": "^2.1.1",
     "loopback-connector": "^4.0.0",
     "mssql": "^4.0.4",
-    "strong-globalize": "^2.5.8"
+    "strong-globalize": "^2.5.8",
+    "sqlcmdjs": "^1.5.0"
   },
   "bundledDependencies": [
     "mssql"
@@ -37,6 +38,7 @@
   },
   "scripts": {
     "lint": "eslint .",
+    "pretest": "node pretest.js",
     "test": "./node_modules/.bin/mocha --timeout 9999 -R spec",
     "posttest": "npm run lint",
     "prepublish": "node remove-regenerator.js"
