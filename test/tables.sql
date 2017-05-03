@@ -4,6 +4,9 @@ DROP TABLE inventory;
 IF OBJECT_ID('dbo.reservation', 'U') IS NOT NULL
 DROP TABLE reservation;
 
+IF OBJECT_ID('dbo.version', 'U') IS NOT NULL
+DROP TABLE version;
+
 IF OBJECT_ID('dbo.customer', 'U') IS NOT NULL
 DROP TABLE customer;
 
@@ -15,9 +18,6 @@ DROP TABLE product;
 
 IF OBJECT_ID('dbo.session', 'U') IS NOT NULL
 DROP TABLE session;
-
-IF OBJECT_ID('dbo.version', 'U') IS NOT NULL
-DROP TABLE version;
 
 IF OBJECT_ID('sa.movies', 'U') IS NOT NULL
 DROP TABLE sa.movies;
