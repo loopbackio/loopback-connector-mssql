@@ -37,7 +37,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "test": "./node_modules/.bin/mocha --timeout 5000 -R spec",
+    "test": "./node_modules/.bin/mocha --timeout 6000 -R spec",
     "posttest": "npm run lint",
     "prepublish": "node remove-regenerator.js"
   },
