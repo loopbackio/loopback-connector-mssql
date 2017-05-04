@@ -116,62 +116,82 @@ describe('Discover model primary keys', function() {
 
   it('should return an array of primary keys for dbo.product', function(done) {
     db.discoverPrimaryKeys('product', {owner: 'dbo'}, function(err, models) {
-      if (err) return done(err);
-      models.forEach(function(m) {
-        // console.dir(m);
-        assert.equal(m.tableName, 'product');
-      });
-      done();
+      if (err) {
+        console.error(err);
+        done(err);
+      } else {
+        models.forEach(function(m) {
+          // console.dir(m);
+          assert(m.tableName === 'product');
+        });
+        done(null, models);
+      }
     });
   });
 
   it('should return just the primary keys and not the foreign keys for inventory', function(done) {
     db.discoverPrimaryKeys('inventory', function(err, models) {
-      if (err) return done(err);
-      models.forEach(function(m) {
-        // console.dir(m);
-        assert.equal(m.tableName, 'inventory');
-        assert.equal(m.columnName, 'id');
-        assert(m.pkName.match(/_pk$/));
-      });
-      done();
+      if (err) {
+        console.error(err);
+        done(err);
+      } else {
+        models.forEach(function(m) {
+          // console.dir(m);
+          assert(m.tableName === 'inventory');
+          assert(m.columnName === 'id');
+          assert(m.pkName.match(/_pk$/));
+        });
+        done(null, models);
+      }
     });
   });
 
   it('should return just the primary keys and not the foreign keys for dbo.inventory', function(done) {
     db.discoverPrimaryKeys('inventory', {owner: 'dbo'}, function(err, models) {
-      if (err) return done(err);
-      models.forEach(function(m) {
-        // console.dir(m);
-        assert.equal(m.tableName, 'inventory');
-        assert.equal(m.columnName, 'id');
-        assert.equal(m.pkName, 'inventory_pk');
-      });
-      done();
+      if (err) {
+        console.error(err);
+        done(err);
+      } else {
+        models.forEach(function(m) {
+          // console.dir(m);
+          assert(m.tableName === 'inventory');
+          assert(m.columnName === 'id');
+          assert(m.pkName === 'inventory_pk');
+        });
+        done(null, models);
+      }
     });
   });
   it('should return the primary key for version which consists of two columns', function(done) {
     db.discoverPrimaryKeys('version', function(err, models) {
-      if (err) return done(err);
-      assert.equal(models.length,  2);
-      models.forEach(function(m) {
-        // console.dir(m);
-        assert.equal(m.tableName, 'version');
-        assert(m.pkName.match(/_pk$/));
-      });
-      done();
+      if (err) {
+        console.error(err);
+        done(err);
+      } else {
+        assert(models.length === 2);
+        models.forEach(function(m) {
+          // console.dir(m);
+          assert(m.tableName === 'version');
+          assert(m.pkName.match(/_pk$/));
+        });
+        done(null, models);
+      }
     });
   });
   it('should return the primary key for dbo.version which consists of two columns', function(done) {
     db.discoverPrimaryKeys('version', {owner: 'dbo'}, function(err, models) {
-      if (err) return done(err);
-      assert.equal(models.length,  2);
-      models.forEach(function(m) {
-        // console.dir(m);
-        assert.equal(m.tableName, 'version');
-        assert(m.pkName.match(/_pk$/));
-      });
-      done();
+      if (err) {
+        console.error(err);
+        done(err);
+      } else {
+        assert(models.length === 2);
+        models.forEach(function(m) {
+          // console.dir(m);
+          assert(m.tableName === 'version');
+          assert(m.pkName.match(/_pk$/));
+        });
+        done(null, models);
+      }
     });
   });
 });
@@ -207,7 +227,6 @@ describe('Discover model generated columns', function() {
         // console.dir(m);
         assert.equal(m.tableName, 'product');
         assert(!m.generated, 'product table should not have generated (identity) columns');
-
       });
       done();
     });
@@ -226,7 +245,6 @@ describe('Discover model generated columns', function() {
     });
   });
 });
-
 
 describe('Discover adl schema from a table', function() {
   it('should return an adl schema for inventory', function(done) {
