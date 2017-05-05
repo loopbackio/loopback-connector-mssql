@@ -31,20 +31,16 @@ describe('discoverModels', function() {
         views: true,
         limit: 3,
       }, function(err, models) {
-        if (err) {
-          console.error(err);
-          done(err);
-        } else {
-          var views = false;
-          models.forEach(function(m) {
-            // console.dir(m);
-            if (m.type === 'view') {
-              views = true;
-            }
-          });
-          assert(views, 'Should have views');
-          done(null, models);
-        }
+        if (err) return done(err);
+        var views = false;
+        models.forEach(function(m) {
+          // console.dir(m);
+          if (m.type === 'view') {
+            views = true;
+          }
+        });
+        assert(views, 'Should have views');
+        done();
       });
     });
   });
@@ -55,21 +51,17 @@ describe('discoverModels', function() {
         views: false,
         limit: 3,
       }, function(err, models) {
-        if (err) {
-          console.error(err);
-          done(err);
-        } else {
-          var views = false;
-          models.forEach(function(m) {
-            // console.dir(m);
-            if (m.type === 'view') {
-              views = true;
-            }
-          });
-          models.should.have.length(3);
-          assert(!views, 'Should not have views');
-          done(null, models);
-        }
+        if (err) return done(err);
+        var views = false;
+        models.forEach(function(m) {
+          // console.dir(m);
+          if (m.type === 'view') {
+            views = true;
+          }
+        });
+        models.should.have.length(3);
+        assert(!views, 'Should not have views');
+        done();
       });
     });
   });
@@ -81,20 +73,16 @@ describe('Discover models including other users', function() {
       all: true,
       limit: 100,
     }, function(err, models) {
-      if (err) {
-        console.error(err);
-        done(err);
-      } else {
-        var others = false;
-        models.forEach(function(m) {
-          // console.dir(m);
-          if (m.owner !== 'dbo') {
-            others = true;
-          }
-        });
-        assert(others, 'Should have tables/views owned by others');
-        done(err, models);
-      }
+      if (err) return done(err);
+      var others = false;
+      models.forEach(function(m) {
+        // console.dir(m);
+        if (m.owner !== 'dbo') {
+          others = true;
+        }
+      });
+      assert(others, 'Should have tables/views owned by others');
+      done(err, models);
     });
   });
 });
@@ -103,16 +91,12 @@ describe('Discover model properties', function() {
   describe('Discover a named model', function() {
     it('should return an array of columns for product', function(done) {
       db.discoverModelProperties('product', function(err, models) {
-        if (err) {
-          console.error(err);
-          done(err);
-        } else {
-          models.forEach(function(m) {
-            // console.dir(m);
-            assert(m.tableName === 'product');
-          });
-          done(null, models);
-        }
+        if (err) return done(err);
+        models.forEach(function(m) {
+          // console.dir(m);
+          assert.equal(m.tableName, 'product');
+        });
+        done();
       });
     });
   });
@@ -121,16 +105,12 @@ describe('Discover model properties', function() {
 describe('Discover model primary keys', function() {
   it('should return an array of primary keys for product', function(done) {
     db.discoverPrimaryKeys('product', function(err, models) {
-      if (err) {
-        console.error(err);
-        done(err);
-      } else {
-        models.forEach(function(m) {
-          // console.dir(m);
-          assert(m.tableName === 'product');
-        });
-        done(null, models);
-      }
+      if (err) return done(err);
+      models.forEach(function(m) {
+        // console.dir(m);
+        assert.equal(m.tableName, 'product');
+      });
+      done();
     });
   });
 
@@ -219,30 +199,49 @@ describe('Discover model primary keys', function() {
 describe('Discover model foreign keys', function() {
   it('should return an array of foreign keys for inventory', function(done) {
     db.discoverForeignKeys('inventory', function(err, models) {
-      if (err) {
-        console.error(err);
-        done(err);
-      } else {
-        models.forEach(function(m) {
-          // console.dir(m);
-          assert(m.fkTableName === 'inventory');
-        });
-        done(null, models);
-      }
+      if (err) return done(err);
+      models.forEach(function(m) {
+        // console.dir(m);
+        assert.equal(m.fkTableName, 'inventory');
+      });
+      done();
     });
   });
   it('should return an array of foreign keys for dbo.inventory', function(done) {
     db.discoverForeignKeys('inventory', {owner: 'dbo'}, function(err, models) {
-      if (err) {
-        console.error(err);
-        done(err);
-      } else {
-        models.forEach(function(m) {
-          // console.dir(m);
-          assert(m.fkTableName === 'inventory');
-        });
-        done(null, models);
-      }
+      if (err) return done(err);
+      models.forEach(function(m) {
+        // console.dir(m);
+        assert.equal(m.fkTableName, 'inventory');
+      });
+      done();
+    });
+  });
+});
+
+describe('Discover model generated columns', function() {
+  it('should return an array of columns for product and none of them is generated', function(done) {
+    db.discoverModelProperties('product', function(err, models) {
+      if (err) return done(err);
+      models.forEach(function(m) {
+        // console.dir(m);
+        assert.equal(m.tableName, 'product');
+        assert(!m.generated, 'product table should not have generated (identity) columns');
+      });
+      done();
+    });
+  });
+  it('should return an array of columns for testgen and the first is generated', function(done) {
+    db.discoverModelProperties('testgen', function(err, models) {
+      if (err) return done(err);
+      models.forEach(function(m) {
+        // console.dir(m);
+        assert.equal(m.tableName, 'testgen');
+        if (m.columnName === 'id') {
+          assert(m.generated, 'testgen.id should be a generated (identity) column');
+        }
+      });
+      done();
     });
   });
 });
