@@ -11,7 +11,7 @@ PLAIN='\033[0m'
 
 ## variables
 MSSQL_CONTAINER="mssql_c"
-HOST=0.0.0.0
+HOST=localhost
 USER="sa"
 PASSWORD="M55sqlT35t"
 PORT=1433
@@ -106,4 +106,5 @@ export MSSQL_DATABASE=$DATABASE
 printf "\n${CYAN}Env variables set.${PLAIN}\n"
 
 printf "\n${CYAN}Status: ${PLAIN}${GREEN}Set up completed successfully.${PLAIN}\n"
+printf "\n${CYAN}Instance url: ${YELLOW}mssql://$USER:$PASSWORD@$HOST/$DATABASE${PLAIN}\n"
 printf "\n${CYAN}To run the test suite:${PLAIN} ${YELLOW}npm test${PLAIN}\n\n"
