@@ -8,11 +8,21 @@ var isWin = (process.platform === 'win32');
 var sqlFileDir = path.resolve(__dirname, 'test', 'tables.sql');
 var sqlDependencyDir = path.resolve(__dirname, 'node_modules', '.bin', 'sqlcmd');
 
+if (!process.env.CI) {
+  return console.log('not seeding DB with test db');
+}
+
 if (!process.env.MSSQL_HOST) process.env.MSSQL_HOST = global.getConfig().host;
 if (!process.env.MSSQL_PORT) process.env.MSSQL_PORT = global.getConfig().port;
 if (!process.env.MSSQL_USER) process.env.MSSQL_USER = global.getConfig().user;
 if (!process.env.MSSQL_PASSWORD) process.env.MSSQL_PASSWORD = global.getConfig().password;
 if (!process.env.MSSQL_DATABASE) process.env.MSSQL_DATABASE = global.getConfig().database;
+
+console.log(process.env.MSSQL_HOST);
+console.log(process.env.MSSQL_PORT);
+console.log(process.env.MSSQL_USER);
+console.log(process.env.MSSQL_PASSWORD);
+console.log(process.env.MSSQL_DATABASE);
 
 var catFileCmd = (isWin ? 'type ' : 'cat ') + sqlFileDir;
 
