@@ -11,22 +11,22 @@ PLAIN='\033[0m'
 
 ## variables
 MSSQL_CONTAINER="mssql_c"
-HOST=localhost
+HOST="localhost"
+PORT=1433
 USER="sa"
 PASSWORD="M55sqlT35t"
-PORT=1433
 DATABASE="master"
 if [ "$1" ]; then
     HOST=$1
 fi
 if [ "$2" ]; then
-    USER=$2
+    PORT=$2
 fi
 if [ "$3" ]; then
-    PASSWORD=$3
+    USER=$3
 fi
 if [ "$4" ]; then
-    PORT=$4
+    PASSWORD=$4
 fi
 if [ "$5" ]; then
     DATABASE=$5
@@ -37,7 +37,7 @@ printf "\n${RED}>> Checking for docker${PLAIN} ${GREEN}...${PLAIN}"
 docker -v > /dev/null 2>&1
 DOCKER_EXISTS=$?
 if [ "$DOCKER_EXISTS" -ne 0 ]; then
-    printf "\n${CYAN}Status: ${PLAIN}${RED}Docker not found. Terminating setup.${PLAIN}\n"
+    printf "\n\n${CYAN}Status: ${PLAIN}${RED}Docker not found. Terminating setup.${PLAIN}\n\n"
     exit 1
 fi
 printf "\n${CYAN}Found docker. Moving on with the setup.${PLAIN}\n"
@@ -57,7 +57,7 @@ printf "\n${CYAN}Image successfully built.${PLAIN}\n"
 printf "\n${RED}>> Starting the mssql container${PLAIN} ${GREEN}...${PLAIN}"
 CONTAINER_STATUS=$(docker run --name $MSSQL_CONTAINER -e ACCEPT_EULA=Y -e SA_PASSWORD=$PASSWORD -p $PORT:1433 -d microsoft/mssql-server-linux:latest 2>&1)
 if [[ "$CONTAINER_STATUS" == *"Error"* ]]; then
-    printf "\n${CYAN}Status: ${PLAIN}${RED}Error starting container. Terminating setup.${PLAIN}\n"
+    printf "\n\n${CYAN}Status: ${PLAIN}${RED}Error starting container. Terminating setup.${PLAIN}\n\n"
     exit 1
 fi
 docker cp ./test/tables.sql $MSSQL_CONTAINER:/home/ > /dev/null 2>&1
@@ -91,10 +91,20 @@ while [ "$OUTPUT" -ne 0 ] && [ "$TIMEOUT" -gt 0 ]
     done
 
 if [ "$TIMEOUT" -le 0 ]; then
-    printf "\n\n${CYAN}Status: ${PLAIN}${RED}Failed to export schema. Terminating setup.${PLAIN}\n"
+    printf "\n\n${CYAN}Status: ${PLAIN}${RED}Failed to export schema. Terminating setup.${PLAIN}\n\n"
     exit 1
 fi
 printf "\n${CYAN}Successfully exported schema to database.${PLAIN}\n"
+
+## create the database
+printf "\n${RED}>> Create the database${PLAIN} ${GREEN}...${PLAIN}"
+docker exec -it $MSSQL_CONTAINER /bin/sh -c "/opt/mssql-tools/bin/sqlcmd -S $HOST -U $USER -P $PASSWORD -Q 'CREATE DATABASE $DATABASE'"
+CREATE_DATABASE=$?
+if [ "$CREATE_DATABASE" -ne 0 ]; then
+    printf "\n\n${CYAN}Status: ${PLAIN}${RED}Error creating database: $DATABASE. Terminating setup.${PLAIN}\n\n"
+    exit 1
+fi
+printf "\n${CYAN}Database created.${PLAIN}\n"
 
 ## set env variables for running test
 printf "\n${RED}>> Setting env variables to run test${PLAIN} ${GREEN}...${PLAIN}"
