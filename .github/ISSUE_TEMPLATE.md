@@ -18,6 +18,8 @@ If bug: Steps to reproduce
 
 <!--
 Link to an app sandbox for reproduction
+
+Note: Failure to provide a sandbox application for reproduction purposes will result in the issue being closed.
 -->
 
 # Expected result
