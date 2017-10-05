@@ -6,6 +6,7 @@
 'use strict';
 require('./init.js');
 require('should');
+var async = require('async');
 
 var Transaction = require('loopback-connector').Transaction;
 
@@ -22,6 +23,20 @@ describe('transactions', function() {
     db.automigrate('PostTX', done);
   });
 
+  // Return an async function to insert a post.
+  function createInsertPost(post, tx) {
+    return function(done) {
+      Post.create(post, {transaction: tx},
+        function(err, p) {
+          if (err) {
+            done(err);
+          } else {
+            done();
+          }
+        });
+      };
+  }
+
   var currentTx;
   // Return an async function to start a transaction and create a post
   function createPostInTx(post) {
@@ -30,14 +45,24 @@ describe('transactions', function() {
         function(err, tx) {
           if (err) return done(err);
           currentTx = tx;
-          Post.create(post, {transaction: tx},
-            function(err, p) {
-              if (err) {
-                done(err);
-              } else {
-                done();
-              }
-            });
+          createInsertPost(post, tx)(done);
+        });
+    };
+  }
+
+  // Return an async function to start a transaction and create two posts in parallel
+  function createParallelPostsInTx(post1, post2) {
+    return function(done) {
+      Transaction.begin(db.connector, Transaction.READ_COMMITTED,
+        function(err, tx) {
+          if (err) return done(err);
+          currentTx = tx;
+          async.parallel([
+            createInsertPost(post1, tx),
+            createInsertPost(post2, tx),
+          ], function(err, data) {
+            done(err);
+          });
         });
     };
   }
@@ -95,5 +120,45 @@ describe('transactions', function() {
     });
 
     it('should not see the rolledback insert', expectToFindPosts(post, 0));
+  });
+
+  describe('commit parallel', function() {
+    var post1 = {title: 't3', content: 'c3'};
+    var post2 = {title: 't4', content: 'c4'};
+    before(createParallelPostsInTx(post1, post2));
+
+    it('should see the uncommitted post1 insert from the same transaction',
+      expectToFindPosts(post1, 1, true));
+
+    it('should see the uncommitted post2 insert from the same transaction',
+      expectToFindPosts(post2, 1, true));
+
+    it('should commit a transaction', function(done) {
+      currentTx.commit(done);
+    });
+
+    it('should see the committed post1 insert', expectToFindPosts(post1, 1));
+
+    it('should see the committed post2 insert', expectToFindPosts(post2, 1));
+  });
+
+  describe('rollback parallel', function() {
+    var post1 = {title: 't5', content: 'c5'};
+    var post2 = {title: 't6', content: 'c6'};
+    before(createParallelPostsInTx(post1, post2));
+
+    it('should see the uncommitted post1 insert from the same transaction',
+      expectToFindPosts(post1, 1, true));
+
+    it('should see the uncommitted post2 insert from the same transaction',
+      expectToFindPosts(post2, 1, true));
+
+    it('should rollback a transaction', function(done) {
+      currentTx.rollback(done);
+    });
+
+    it('should not see the rolledback post1 insert', expectToFindPosts(post1, 0));
+
+    it('should not see the rolledback post2 insert', expectToFindPosts(post2, 0));
   });
 });
