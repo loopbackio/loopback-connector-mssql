@@ -1,3 +1,37 @@
+2017-10-05, Version 3.1.0
+=========================
+
+ * update globalize string (Diana Lau)
+
+ * Add stalebot configuration (Kevin Delisle)
+
+ * Create Issue and PR Templates (#167) (Sakib Hasan)
+
+ * Add CODEOWNER file (Diana Lau)
+
+ * Require init on mocha args (ssh24)
+
+ * Add docker setup (#148) (Sakib Hasan)
+
+ * Return if column is generated or not (#100) (Christiaan Westerbeek)
+
+ * Fix discovery of primary keys (#99) (Christiaan Westerbeek)
+
+ * Remove appveyor service (#145) (Sakib Hasan)
+
+ * Fix params for isActual function (#143) (Nguyễn Kim Kha)
+
+ * Enable clean DB seed as pre-test (#142) (Sakib Hasan)
+
+ * Fix eslint issues & buildPropertyType() signature (Raymond Feng)
+
+ * Upgrade deps to mssql@4.x (Raymond Feng)
+
+ * add appveyor for CI (#137) (Ryan Graham)
+
+ * fix discovery turkish collation (#123) (emrahcetiner)
+
+
 2017-03-31, Version 3.0.0
 =========================
 
