@@ -27,6 +27,19 @@ describe('MS SQL server connector', function() {
             schema: 'dbo',
             table: 'CUSTOMER_TEST',
           },
+          indexes: {
+            idEmailIndex: {
+              keys: {
+                id: 1,
+                email: 1,
+              },
+              options: {
+                unique: true,
+              },
+              columns: 'id,email',
+              kind: 'unique',
+            },
+          },
         },
         properties: {
           id: {
@@ -48,6 +61,10 @@ describe('MS SQL server connector', function() {
             type: 'Number',
             required: false,
           },
+          firstName: {
+            type: 'String',
+            required: false,
+          },
         },
       };
 
@@ -59,6 +76,19 @@ describe('MS SQL server connector', function() {
           mssql: {
             schema: 'dbo',
             table: 'CUSTOMER_TEST',
+          },
+          indexes: {
+            idCityIndex: {
+              keys: {
+                id: 1,
+                city: 1,
+              },
+              options: {
+                unique: true,
+              },
+              columns: 'id,city',
+              kind: 'unique',
+            },
           },
         },
         properties: {
@@ -88,6 +118,14 @@ describe('MS SQL server connector', function() {
             required: false,
             length: 40,
           },
+          city: {
+            type: 'String',
+            required: false,
+            length: 40,
+            index: {
+              unique: true,
+            },
+          },
         },
       };
 
@@ -98,7 +136,7 @@ describe('MS SQL server connector', function() {
       assert(!err);
       ds.discoverModelProperties('CUSTOMER_TEST', function(err, props) {
         assert(!err);
-        assert.equal(props.length, 4);
+        assert.equal(props.length, 5);
         var names = props.map(function(p) {
           return p.columnName;
         });
@@ -116,7 +154,7 @@ describe('MS SQL server connector', function() {
         /* eslint-enable camelcase */
         ds.autoupdate(function(err, result) {
           ds.discoverModelProperties('CUSTOMER_TEST', function(err, props) {
-            assert.equal(props.length, 4);
+            assert.equal(props.length, 5);
             var names = props.map(function(p) {
               return p.columnName;
             });
@@ -124,8 +162,48 @@ describe('MS SQL server connector', function() {
             assert.equal(names[1], 'email');
             assert.equal(names[2], 'firstName');
             assert.equal(names[3], 'lastName');
-            // console.log(err, result);
-            done(err, result);
+            assert.equal(names[4], 'city');
+
+            var schema = "'dbo'";
+            var table = "'CUSTOMER_TEST'";
+            var sql = 'SELECT OBJECT_SCHEMA_NAME(T.[object_id],DB_ID()) AS [table_schema],' +
+            ' T.[name] AS [Table], I.[name] AS [Key_name], AC.[name] AS [Column_name],' +
+            ' I.[type_desc], I.[is_unique], I.[data_space_id], I.[ignore_dup_key], I.[is_primary_key],' +
+            ' I.[is_unique_constraint], I.[fill_factor], I.[is_padded], I.[is_disabled], I.[is_hypothetical],' +
+            ' I.[allow_row_locks], I.[allow_page_locks], IC.[is_descending_key], IC.[is_included_column]' +
+            ' FROM sys.[tables] AS T' +
+            ' INNER JOIN sys.[indexes] I ON T.[object_id] = I.[object_id]' +
+            ' INNER JOIN sys.[index_columns] IC ON I.[object_id] = IC.[object_id]' +
+            ' INNER JOIN sys.[all_columns] AC ON T.[object_id] = AC.[object_id] AND IC.[column_id] = AC.[column_id]' +
+            ' WHERE T.[is_ms_shipped] = 0 AND I.[type_desc] <> \'HEAP\'' +
+            ' AND OBJECT_SCHEMA_NAME(T.[object_id],DB_ID()) = ' + schema + ' AND T.[name] = ' + table +
+            ' ORDER BY T.[name], I.[index_id], IC.[key_ordinal]';
+
+            ds.connector.execute(sql, function(err, indexes) {
+              var countIdEmailIndex = 0;
+              var countIdCityIndex = 0;
+              var countCityIndex = 0;
+              var countAgeIndex = 0;
+              for (var i = 0; i < indexes.length; i++) {
+                if (indexes[i].Key_name == 'id_email_unique_ASC_idx') {
+                  countIdEmailIndex++;
+                }
+                if (indexes[i].Key_name == 'id_city_unique_ASC_idx') {
+                  countIdCityIndex++;
+                }
+                if (indexes[i].Key_name == 'city_NONCLUSTERED_ASC_idx') {
+                  countCityIndex++;
+                }
+                if (indexes[i].Key_name == 'age_NONCLUSTERED_ASC_idx') {
+                  countAgeIndex++;
+                }
+              }
+              assert.equal(countIdEmailIndex, 0);
+              assert.equal(countAgeIndex, 0);
+              assert.equal(countIdCityIndex > 0, true);
+              assert.equal(countCityIndex > 0, true);
+              done(err, result);
+            });
           });
         });
       });
