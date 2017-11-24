@@ -27,6 +27,19 @@ describe('MS SQL server connector', function() {
             schema: 'dbo',
             table: 'CUSTOMER_TEST',
           },
+          indexes: {
+            idEmailIndex: {
+              keys: {
+                id: 1,
+                email: 1,
+              },
+              options: {
+                unique: true,
+              },
+              columns: 'id,email',
+              kind: 'unique',
+            },
+          },
         },
         properties: {
           id: {
@@ -61,15 +74,15 @@ describe('MS SQL server connector', function() {
             table: 'CUSTOMER_TEST',
           },
           indexes: {
-            idEmailIndex: {
+            idCityIndex: {
               keys: {
                 id: 1,
-                email: 1,
+                city: 1,
               },
               options: {
                 unique: true,
               },
-              columns: 'id,email',
+              columns: 'id,city',
               kind: 'unique',
             },
           },
@@ -97,6 +110,11 @@ describe('MS SQL server connector', function() {
             length: 40,
           },
           lastName: {
+            type: 'String',
+            required: false,
+            length: 40,
+          },
+          city: {
             type: 'String',
             required: false,
             length: 40,
@@ -129,7 +147,7 @@ describe('MS SQL server connector', function() {
         /* eslint-enable camelcase */
         ds.autoupdate(function(err, result) {
           ds.discoverModelProperties('CUSTOMER_TEST', function(err, props) {
-            assert.equal(props.length, 4);
+            assert.equal(props.length, 5);
             var names = props.map(function(p) {
               return p.columnName;
             });
@@ -137,6 +155,7 @@ describe('MS SQL server connector', function() {
             assert.equal(names[1], 'email');
             assert.equal(names[2], 'firstName');
             assert.equal(names[3], 'lastName');
+            assert.equal(names[4], 'city');
 
             var schema = "'dbo'";
             var table = "'CUSTOMER_TEST'";
@@ -154,13 +173,18 @@ describe('MS SQL server connector', function() {
             ' ORDER BY T.[name], I.[index_id], IC.[key_ordinal]';
 
             ds.connector.execute(sql, function(err, indexes) {
-              var count = 0;
+              var countIdEmailIndex = 0;
+              var countIdCityIndex = 0;
               for (var i = 0; i < indexes.length; i++) {
-                if (indexes[i].Key_name == 'idEmailIndex') {
-                  count++;
+                if (indexes[i].Key_name == 'id_email_unique_ASC_idx') {
+                  countIdEmailIndex++;
+                }
+                if (indexes[i].Key_name == 'id_city_unique_ASC_idx') {
+                  countIdCityIndex++;
                 }
               }
-              assert.equal(count, 3);
+              assert.equal(countIdEmailIndex, 0);
+              assert.equal(countIdCityIndex, 3);
               done(err, result);
             });
           });
