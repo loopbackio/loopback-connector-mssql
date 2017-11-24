@@ -182,6 +182,8 @@ describe('MS SQL server connector', function() {
             ds.connector.execute(sql, function(err, indexes) {
               var countIdEmailIndex = 0;
               var countIdCityIndex = 0;
+              var countCityIndex = 0;
+              var countAgeIndex = 0;
               for (var i = 0; i < indexes.length; i++) {
                 if (indexes[i].Key_name == 'id_email_unique_ASC_idx') {
                   countIdEmailIndex++;
@@ -189,9 +191,17 @@ describe('MS SQL server connector', function() {
                 if (indexes[i].Key_name == 'id_city_unique_ASC_idx') {
                   countIdCityIndex++;
                 }
+                if (indexes[i].Key_name == 'city_NONCLUSTERED_ASC_idx') {
+                  countCityIndex++;
+                }
+                if (indexes[i].Key_name == 'age_NONCLUSTERED_ASC_idx') {
+                  countAgeIndex++;
+                }
               }
               assert.equal(countIdEmailIndex, 0);
+              assert.equal(countAgeIndex, 0);
               assert.equal(countIdCityIndex > 0, true);
+              assert.equal(countCityIndex > 0, true);
               done(err, result);
             });
           });
