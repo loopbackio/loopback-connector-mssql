@@ -61,6 +61,10 @@ describe('MS SQL server connector', function() {
             type: 'Number',
             required: false,
           },
+          firstName: {
+            type: 'String',
+            required: false,
+          },
         },
       };
 
@@ -118,6 +122,9 @@ describe('MS SQL server connector', function() {
             type: 'String',
             required: false,
             length: 40,
+            index: {
+              unique: true,
+            },
           },
         },
       };
@@ -129,7 +136,7 @@ describe('MS SQL server connector', function() {
       assert(!err);
       ds.discoverModelProperties('CUSTOMER_TEST', function(err, props) {
         assert(!err);
-        assert.equal(props.length, 4);
+        assert.equal(props.length, 5);
         var names = props.map(function(p) {
           return p.columnName;
         });
@@ -184,7 +191,7 @@ describe('MS SQL server connector', function() {
                 }
               }
               assert.equal(countIdEmailIndex, 0);
-              assert.equal(countIdCityIndex, 3);
+              assert.equal(countIdCityIndex > 0, true);
               done(err, result);
             });
           });
