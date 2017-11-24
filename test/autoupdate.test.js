@@ -60,6 +60,19 @@ describe('MS SQL server connector', function() {
             schema: 'dbo',
             table: 'CUSTOMER_TEST',
           },
+          indexes: {
+            idEmailIndex: {
+              keys: {
+                id: 1,
+                email: 1,
+              },
+              options: {
+                unique: true,
+              },
+              columns: 'id,email',
+              kind: 'unique',
+            },
+          },
         },
         properties: {
           id: {
@@ -124,8 +137,32 @@ describe('MS SQL server connector', function() {
             assert.equal(names[1], 'email');
             assert.equal(names[2], 'firstName');
             assert.equal(names[3], 'lastName');
-            // console.log(err, result);
-            done(err, result);
+
+            var schema = "'dbo'";
+            var table = "'CUSTOMER_TEST'";
+            var sql = 'SELECT OBJECT_SCHEMA_NAME(T.[object_id],DB_ID()) AS [table_schema],' +
+            ' T.[name] AS [Table], I.[name] AS [Key_name], AC.[name] AS [Column_name],' +
+            ' I.[type_desc], I.[is_unique], I.[data_space_id], I.[ignore_dup_key], I.[is_primary_key],' +
+            ' I.[is_unique_constraint], I.[fill_factor], I.[is_padded], I.[is_disabled], I.[is_hypothetical],' +
+            ' I.[allow_row_locks], I.[allow_page_locks], IC.[is_descending_key], IC.[is_included_column]' +
+            ' FROM sys.[tables] AS T' +
+            ' INNER JOIN sys.[indexes] I ON T.[object_id] = I.[object_id]' +
+            ' INNER JOIN sys.[index_columns] IC ON I.[object_id] = IC.[object_id]' +
+            ' INNER JOIN sys.[all_columns] AC ON T.[object_id] = AC.[object_id] AND IC.[column_id] = AC.[column_id]' +
+            ' WHERE T.[is_ms_shipped] = 0 AND I.[type_desc] <> \'HEAP\'' +
+            ' AND OBJECT_SCHEMA_NAME(T.[object_id],DB_ID()) = ' + schema + ' AND T.[name] = ' + table +
+            ' ORDER BY T.[name], I.[index_id], IC.[key_ordinal]';
+
+            ds.connector.execute(sql, function(err, indexes) {
+              var count = 0;
+              for (var i = 0; i < indexes.length; i++) {
+                if (indexes[i].Key_name == 'idEmailIndex') {
+                  count++;
+                }
+              }
+              assert.equal(count, 3);
+              done(err, result);
+            });
           });
         });
       });
