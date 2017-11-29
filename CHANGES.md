@@ -1,3 +1,25 @@
+2017-11-29, Version 3.2.0
+=========================
+
+ * Implement test for single column indices (Daan Middendorp)
+
+ * Fix single column index altering (Daan Middendorp)
+
+ * Fix deletion of indices and test (Daan Middendorp)
+
+ * Solve index naming issue (Daan Middendorp)
+
+ * Test update indexes (Daan Middendorp)
+
+ * Fix altering of indexes (Daan Middendorp)
+
+ * Solved imported unittests for previous commit (Daan Middendorp)
+
+ * Fix showIndexes function (Daan Middendorp)
+
+ * Fix bigint (jannyHou)
+
+
 2017-10-05, Version 3.1.0
 =========================
 
