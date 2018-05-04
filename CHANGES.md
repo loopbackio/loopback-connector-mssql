@@ -1,3 +1,11 @@
+2018-05-04, Version 3.2.1
+=========================
+
+ * chore: update CODEOWNERS (Diana Lau)
+
+ * Update Queries to Uppercase (Rafael E. Ajuria)
+
+
 2017-11-29, Version 3.2.0
 =========================
 
