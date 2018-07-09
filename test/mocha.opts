@@ -1,0 +1,3 @@
+--timeout 9999
+--require test/init.js
+--reporter spec
