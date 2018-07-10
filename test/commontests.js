@@ -110,16 +110,16 @@ commonTest.it('should be able to ORDER results', function(test) {
   function doFilterAndSortReverseTest() {
     tests += 1;
     schema.models.Post.all({where: {date: new Date(1000 * 9)}, order: 'title DESC', limit: 3},
-    function(err, posts) {
-      if (err) console.log(err);
-      test.equal(posts.length, 2, 'Exactly 2 posts returned by query');
-      ['Title Z', 'Title C'].forEach(function(t, i) {
-        if (posts[i]) {
-          test.equal(posts[i].title, t, 'doFilterAndSortReverseTest');
-        }
+      function(err, posts) {
+        if (err) console.log(err);
+        test.equal(posts.length, 2, 'Exactly 2 posts returned by query');
+        ['Title Z', 'Title C'].forEach(function(t, i) {
+          if (posts[i]) {
+            test.equal(posts[i].title, t, 'doFilterAndSortReverseTest');
+          }
+        });
+        finished();
       });
-      finished();
-    });
   }
 
   function doMultipleSortTest() {
