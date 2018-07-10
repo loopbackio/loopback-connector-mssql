@@ -138,7 +138,7 @@ describe('mssql connector', function() {
       });
     });
 
-  it('should escape number values to defect SQL injection in find',
+  it('should escape number values to defect SQL injection in find - test 2',
     function(done) {
       Post.find({limit: '(SELECT 1+1)'}, function(err, p) {
         should.exists(err);
@@ -163,20 +163,21 @@ describe('mssql connector', function() {
       connector.execute('DROP TABLE SQLI_TEST;', function(err) {
         connector.execute('CREATE TABLE SQLI_TEST' +
           '(V1 VARCHAR(100), V2 VARCHAR(100) )',
-          function(err) {
-            if (err) return done(err);
-            connector.execute('INSERT INTO SQLI_TEST VALUES ( (?), (?) )',
-              [value1, value2], function(err) {
+        function(err) {
+          if (err) return done(err);
+          connector.execute('INSERT INTO SQLI_TEST VALUES ( (?), (?) )',
+            [value1, value2], function(err) {
+              if (err) return done(err);
+              connector.execute('SELECT * FROM SQLI_TEST', function(err, data) {
                 if (err) return done(err);
-                connector.execute('SELECT * FROM SQLI_TEST', function(err, data) {
-                  if (err) return done(err);
-                  data.should.be.eql(
-                    [{V1: '(?)',
-                      V2: ', 1 ); INSERT INTO SQLI_TEST VALUES (1, 2); --'}]);
-                  done();
-                });
+                data.should.be.eql(
+                  [{V1: '(?)',
+                    V2: ', 1 ); INSERT INTO SQLI_TEST VALUES (1, 2); --'}]
+                );
+                done();
               });
-          });
+            });
+        });
       });
     });
 
@@ -237,7 +238,8 @@ describe('mssql connector', function() {
           p.should.have.property('rating', 3.5);
           done();
         });
-      });
+      }
+    );
   });
 
   context('regexp operator', function() {
@@ -254,7 +256,7 @@ describe('mssql connector', function() {
       /* global sinon */
       sinon.stub(console, 'warn');
     });
-    afterEach(function removeSpy()  {
+    afterEach(function removeSpy() {
       console.warn.restore();
     });
     after(function deleteTestFixtures(done) {
