@@ -1,3 +1,17 @@
+2018-08-07, Version 3.3.0
+=========================
+
+ * update to MIT license (Diana Lau)
+
+ * chore: update node + dependencies (virkt25)
+
+ * Increase test limit from 9.9 to 30 seconds (Miroslav Bajtoš)
+
+ * Move Mocha config to `test/mocha.opts` (Miroslav Bajtoš)
+
+ * [WebFM] cs/pl/ru translation (candytangnb)
+
+
 2018-05-04, Version 3.2.1
 =========================
 
