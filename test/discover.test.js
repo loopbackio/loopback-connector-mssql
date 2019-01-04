@@ -207,12 +207,72 @@ describe('Discover model foreign keys', function() {
       done();
     });
   });
+  it('should return references to the product and location tables', function(done) {
+    db.discoverForeignKeys('inventory', function(err, models) {
+      if (err) return done(err);
+      try {
+        assert.equal(models.length, 2);
+        var containsProduct = models.some(m=> m.pkTableName === 'product');
+        assert.equal(containsProduct, true);
+        var containsLocation = models.some(m=> m.pkTableName === 'location');
+        assert.equal(containsLocation, true);
+        done();
+      } catch (e) {
+        done(e);
+      }
+    });
+  });
   it('should return an array of foreign keys for dbo.inventory', function(done) {
     db.discoverForeignKeys('inventory', {owner: 'dbo'}, function(err, models) {
       if (err) return done(err);
       models.forEach(function(m) {
         // console.dir(m);
         assert.equal(m.fkTableName, 'inventory');
+      });
+      done();
+    });
+  });
+});
+
+describe('Discover model exported foreign keys', function() {
+  it('should return an array of exported foreign keys for location', function(done) {
+    db.discoverExportedForeignKeys('location', function(err, models) {
+      if (err) return done(err);
+      models.forEach(function(m) {
+        try {
+          assert.equal(m.pkTableName, 'location');
+        } catch (e) {
+          done(e);
+        }
+      });
+      done();
+    });
+  });
+  it('should return references to the reservation and inventory tables', function(done) {
+    db.discoverExportedForeignKeys('location', function(err, models) {
+      if (err) return done(err);
+      try {
+        assert.equal(models.length, 2);
+        var containsInventory = models.some(m=> m.fkTableName === 'inventory');
+        assert.equal(containsInventory, true);
+        var containsLocation = models.some(m=> m.fkTableName === 'reservation');
+        assert.equal(containsLocation, true);
+        done();
+      } catch (e) {
+        done(e);
+      }
+    });
+  });
+  it('should return an array of exported foreign keys for dbo.location', function(done) {
+    db.discoverExportedForeignKeys('location', {owner: 'dbo'}, function(err, models) {
+      if (err) return done(err);
+      models.forEach(function(m) {
+        // console.dir(m);
+        try {
+          assert.equal(m.pkTableName, 'location');
+        } catch (e) {
+          done(e);
+        }
       });
       done();
     });
