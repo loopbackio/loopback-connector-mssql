@@ -48,5 +48,6 @@
     "url": "https://github.com/strongloop/loopback-connector-mssql.git"
   },
   "copyright.owner": "IBM Corp.",
-  "license": "MIT"
+  "license": "MIT",
+  "author": "IBM Corp."
 }
