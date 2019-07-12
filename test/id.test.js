@@ -5,10 +5,10 @@
 
 'use strict';
 require('./init.js');
-var should = require('should');
-var assert = require('assert');
-var async = require('async');
-var ds;
+const should = require('should');
+const assert = require('assert');
+const async = require('async');
+let ds;
 
 before(function() {
   /* global getDataSource */
@@ -17,7 +17,7 @@ before(function() {
 
 describe('Manipulating id column', function() {
   it('should auto generate id', function(done) {
-    var schema =
+    const schema =
       {
         name: 'WarehouseTest',
         options: {
@@ -39,8 +39,8 @@ describe('Manipulating id column', function() {
         },
       };
 
-    var models = ds.modelBuilder.buildModels(schema);
-    var Model = models.WarehouseTest;
+    const models = ds.modelBuilder.buildModels(schema);
+    const Model = models.WarehouseTest;
     Model.attachTo(ds);
 
     ds.automigrate(function(err) {
@@ -66,7 +66,7 @@ describe('Manipulating id column', function() {
             function(err, results) {
               assert(!err);
               results.should.have.lengthOf(3);
-              for (var i = 0; i < results.length; i++) {
+              for (let i = 0; i < results.length; i++) {
                 should.equal(results[i].id, i + 1);
               }
               callback();
@@ -77,7 +77,7 @@ describe('Manipulating id column', function() {
   });
 
   it('should use manual id', function(done) {
-    var schema =
+    const schema =
       {
         name: 'WarehouseTest',
         options: {
@@ -101,8 +101,8 @@ describe('Manipulating id column', function() {
         },
       };
 
-    var models = ds.modelBuilder.buildModels(schema);
-    var Model = models.WarehouseTest;
+    const models = ds.modelBuilder.buildModels(schema);
+    const Model = models.WarehouseTest;
     Model.attachTo(ds);
 
     ds.automigrate(function(err) {
@@ -129,7 +129,7 @@ describe('Manipulating id column', function() {
   });
 
   it('should use bigint id', function(done) {
-    var schema =
+    const schema =
       {
         name: 'WarehouseTest',
         options: {
@@ -158,8 +158,8 @@ describe('Manipulating id column', function() {
         },
       };
 
-    var models = ds.modelBuilder.buildModels(schema);
-    var Model = models.WarehouseTest;
+    const models = ds.modelBuilder.buildModels(schema);
+    const Model = models.WarehouseTest;
     Model.attachTo(ds);
 
     ds.automigrate(function(err) {

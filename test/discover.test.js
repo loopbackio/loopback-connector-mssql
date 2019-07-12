@@ -8,10 +8,10 @@ process.env.NODE_ENV = 'test';
 require('./init.js');
 require('should');
 
-var assert = require('assert');
+const assert = require('assert');
 
 /* global getDataSource */
-var db = getDataSource();
+const db = getDataSource();
 
 describe('discoverModels', function() {
   describe('Discover database schemas', function() {
@@ -32,7 +32,7 @@ describe('discoverModels', function() {
         limit: 3,
       }, function(err, models) {
         if (err) return done(err);
-        var views = false;
+        let views = false;
         models.forEach(function(m) {
           // console.dir(m);
           if (m.type === 'view') {
@@ -52,7 +52,7 @@ describe('discoverModels', function() {
         limit: 3,
       }, function(err, models) {
         if (err) return done(err);
-        var views = false;
+        let views = false;
         models.forEach(function(m) {
           // console.dir(m);
           if (m.type === 'view') {
@@ -74,7 +74,7 @@ describe('Discover models including other users', function() {
       limit: 100,
     }, function(err, models) {
       if (err) return done(err);
-      var others = false;
+      let others = false;
       models.forEach(function(m) {
         // console.dir(m);
         if (m.owner !== 'dbo') {

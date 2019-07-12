@@ -7,10 +7,10 @@
  * This script removes regenerator bundled with babel-runtime
  */
 'use strict';
-var fs = require('fs');
+const fs = require('fs');
 try {
-  var index = require.resolve('babel-runtime/regenerator/index.js');
-  var runtime = require.resolve(
+  const index = require.resolve('babel-runtime/regenerator/index.js');
+  const runtime = require.resolve(
     'babel-runtime/regenerator/runtime.js'
   );
   if (index) {
@@ -18,7 +18,7 @@ try {
       if (err) console.error(err);
       if (runtime) fs.unlink(runtime, function(err) {
         if (err) console.error(err);
-      }); ;
+      });
     });
   }
 } catch (err) {

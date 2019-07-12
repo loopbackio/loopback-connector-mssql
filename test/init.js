@@ -6,9 +6,9 @@
 'use strict';
 module.exports = require('should');
 
-var DataSource = require('loopback-datasource-juggler').DataSource;
+const DataSource = require('loopback-datasource-juggler').DataSource;
 
-var config = {};
+let config = {};
 try {
   config = require('rc')('loopback', {test: {mssql: {}}}).test.mssql;
 } catch (err) {
@@ -22,7 +22,7 @@ try {
 }
 
 global.getConfig = function(options) {
-  var dbConf = {
+  const dbConf = {
     host: process.env.MSSQL_HOST || config.host || config.hostname || config.server || 'localhost',
     port: process.env.MSSQL_PORT || config.port || 1433,
     database: process.env.MSSQL_DATABASE || config.database || 'test',
@@ -36,7 +36,7 @@ global.getConfig = function(options) {
   };
 
   if (options) {
-    for (var el in options) {
+    for (const el in options) {
       dbConf[el] = options[el];
     }
   }
@@ -46,7 +46,7 @@ global.getConfig = function(options) {
 
 global.getDataSource = global.getSchema = function(options) {
   /* global getConfig */
-  var db = new DataSource(require('../'), getConfig(options));
+  const db = new DataSource(require('../'), getConfig(options));
   return db;
 };
 

@@ -5,8 +5,8 @@
 
 'use strict';
 require('./init.js');
-var assert = require('assert');
-var ds;
+const assert = require('assert');
+let ds;
 
 before(function() {
   /* global getDataSource */
@@ -18,7 +18,7 @@ describe('MS SQL server connector', function() {
     this.timeout(30000);
 
     /* eslint-disable camelcase */
-    var schema_v1 =
+    const schema_v1 =
       {
         name: 'CustomerTest',
         options: {
@@ -68,7 +68,7 @@ describe('MS SQL server connector', function() {
         },
       };
 
-    var schema_v2 =
+    const schema_v2 =
       {
         name: 'CustomerTest',
         options: {
@@ -137,7 +137,7 @@ describe('MS SQL server connector', function() {
       ds.discoverModelProperties('CUSTOMER_TEST', function(err, props) {
         assert(!err);
         assert.equal(props.length, 5);
-        var names = props.map(function(p) {
+        const names = props.map(function(p) {
           return p.columnName;
         });
         assert.equal(props[0].nullable, 'NO');
@@ -155,7 +155,7 @@ describe('MS SQL server connector', function() {
         ds.autoupdate(function(err, result) {
           ds.discoverModelProperties('CUSTOMER_TEST', function(err, props) {
             assert.equal(props.length, 5);
-            var names = props.map(function(p) {
+            const names = props.map(function(p) {
               return p.columnName;
             });
             assert.equal(names[0], 'id');
@@ -164,9 +164,9 @@ describe('MS SQL server connector', function() {
             assert.equal(names[3], 'lastName');
             assert.equal(names[4], 'city');
 
-            var schema = "'dbo'";
-            var table = "'CUSTOMER_TEST'";
-            var sql = 'SELECT OBJECT_SCHEMA_NAME(T.[object_id],DB_ID()) AS [table_schema],' +
+            const schema = "'dbo'";
+            const table = "'CUSTOMER_TEST'";
+            const sql = 'SELECT OBJECT_SCHEMA_NAME(T.[object_id],DB_ID()) AS [table_schema],' +
             ' T.[name] AS [Table], I.[name] AS [Key_name], AC.[name] AS [Column_name],' +
             ' I.[type_desc], I.[is_unique], I.[data_space_id], I.[ignore_dup_key], I.[is_primary_key],' +
             ' I.[is_unique_constraint], I.[fill_factor], I.[is_padded], I.[is_disabled], I.[is_hypothetical],' +
@@ -180,11 +180,11 @@ describe('MS SQL server connector', function() {
             ' ORDER BY T.[name], I.[index_id], IC.[key_ordinal]';
 
             ds.connector.execute(sql, function(err, indexes) {
-              var countIdEmailIndex = 0;
-              var countIdCityIndex = 0;
-              var countCityIndex = 0;
-              var countAgeIndex = 0;
-              for (var i = 0; i < indexes.length; i++) {
+              let countIdEmailIndex = 0;
+              let countIdCityIndex = 0;
+              let countCityIndex = 0;
+              let countAgeIndex = 0;
+              for (let i = 0; i < indexes.length; i++) {
                 if (indexes[i].Key_name == 'id_email_unique_ASC_idx') {
                   countIdEmailIndex++;
                 }
