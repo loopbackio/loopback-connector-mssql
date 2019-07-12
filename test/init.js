@@ -6,7 +6,8 @@
 'use strict';
 module.exports = require('should');
 
-const DataSource = require('loopback-datasource-juggler').DataSource;
+const juggler = require('loopback-datasource-juggler');
+let DataSource = juggler.DataSource;
 
 let config = {};
 try {
@@ -44,10 +45,19 @@ global.getConfig = function(options) {
   return dbConf;
 };
 
+let db;
+
 global.getDataSource = global.getSchema = function(options) {
   /* global getConfig */
-  const db = new DataSource(require('../'), getConfig(options));
+  db = new DataSource(require('../'), getConfig(options));
   return db;
+};
+
+global.resetDataSourceClass = function(ctor) {
+  DataSource = ctor || juggler.DataSource;
+  const promise = db ? db.disconnect() : Promise.resolve();
+  db = undefined;
+  return promise;
 };
 
 global.connectorCapabilities = {
