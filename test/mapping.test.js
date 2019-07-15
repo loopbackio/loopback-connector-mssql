@@ -4,12 +4,12 @@
 // License text available at https://opensource.org/licenses/MIT
 
 'use strict';
-var should = require('should');
+const should = require('should');
 require('./init');
 
-var async = require('async');
+const async = require('async');
 
-var db;
+let db;
 
 before(function() {
   /* global getDataSource */
@@ -18,7 +18,7 @@ before(function() {
 
 describe('Mapping models', function() {
   it('should honor the mssql settings for table/column', function(done) {
-    var schema = {
+    const schema = {
       name: 'TestInventory',
       options: {
         idInjection: false,
@@ -66,8 +66,8 @@ describe('Mapping models', function() {
         },
       },
     };
-    var models = db.modelBuilder.buildModels(schema);
-    var Model = models.TestInventory;
+    const models = db.modelBuilder.buildModels(schema);
+    const Model = models.TestInventory;
     Model.attachTo(db);
 
     db.automigrate(function(err, data) {

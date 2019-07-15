@@ -6,12 +6,12 @@
 /* eslint-env node, mocha */
 'use strict';
 require('./init.js');
-var assert = require('assert');
-var DataSource = require('loopback-datasource-juggler').DataSource;
-var url = require('url');
-var mssqlConnector = require('../');
+const assert = require('assert');
+const DataSource = require('loopback-datasource-juggler').DataSource;
+const url = require('url');
+const mssqlConnector = require('../');
 
-var config;
+let config;
 
 before(function() {
   config = global.getConfig();
@@ -19,13 +19,13 @@ before(function() {
 
 describe('testConnection', function() {
   it('should pass with valid settings', function(done) {
-    var db = new DataSource(mssqlConnector, config);
+    const db = new DataSource(mssqlConnector, config);
     db.ping(done);
   });
 
   it('ignores all other settings when url is present', function(done) {
-    var formatedUrl = generateURL(config);
-    var dbConfig = {
+    const formatedUrl = generateURL(config);
+    const dbConfig = {
       url: formatedUrl,
       host: 'invalid-hostname',
       port: 80,
@@ -34,13 +34,13 @@ describe('testConnection', function() {
       password: 'invalid-password',
     };
 
-    var db = new DataSource(mssqlConnector, dbConfig);
+    const db = new DataSource(mssqlConnector, dbConfig);
     db.ping(done);
   });
 });
 
 function generateURL(config) {
-  var urlObj = {
+  const urlObj = {
     protocol: 'mssql',
     auth: config.user + ':' + config.password,
     hostname: config.host,
@@ -49,25 +49,25 @@ function generateURL(config) {
     query: {encrypt: true},
     slashes: true,
   };
-  var formatedUrl = url.format(urlObj);
+  const formatedUrl = url.format(urlObj);
   return formatedUrl;
-};
+}
 
 describe('lazyConnect', function() {
-  var getDS = function(myconfig) {
-    var db = new DataSource(mssqlConnector, myconfig);
+  const getDS = function(myconfig) {
+    const db = new DataSource(mssqlConnector, myconfig);
     return db;
   };
 
   it('should skip connect phase (lazyConnect = true)', function(done) {
-    var dsConfig = {
+    const dsConfig = {
       host: 'invalid-hostname',
       port: 80,
       lazyConnect: true,
     };
-    var ds = getDS(dsConfig);
+    const ds = getDS(dsConfig);
 
-    var errTimeout = setTimeout(function() {
+    const errTimeout = setTimeout(function() {
       done();
     }, 2000);
     ds.on('error', function(err) {
@@ -77,12 +77,12 @@ describe('lazyConnect', function() {
   });
 
   it('should report connection error (lazyConnect = false)', function(done) {
-    var dsConfig = {
+    const dsConfig = {
       host: 'invalid-hostname',
       port: 80,
       lazyConnect: false,
     };
-    var ds = getDS(dsConfig);
+    const ds = getDS(dsConfig);
 
     ds.on('error', function(err) {
       err.message.should.containEql('ENOTFOUND');

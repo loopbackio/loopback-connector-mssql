@@ -6,8 +6,8 @@
 'use strict';
 require('./init');
 
-var should = require('should');
-var Post, PostWithUUID, PostWithStringId, db;
+const should = require('should');
+let Post, PostWithUUID, PostWithStringId, db;
 
 describe('mssql connector', function() {
   before(function() {
@@ -43,7 +43,7 @@ describe('mssql connector', function() {
       });
   });
 
-  var post;
+  let post;
   it('should support boolean types with true value', function(done) {
     Post.create({title: 'T1', content: 'C1', approved: true}, function(err, p) {
       should.not.exists(err);
@@ -156,9 +156,9 @@ describe('mssql connector', function() {
 
   it('should avoid SQL injection for parameters containing (?)',
     function(done) {
-      var connector = db.connector;
-      var value1 = '(?)';
-      var value2 = ', 1 ); INSERT INTO SQLI_TEST VALUES (1, 2); --';
+      const connector = db.connector;
+      const value1 = '(?)';
+      const value2 = ', 1 ); INSERT INTO SQLI_TEST VALUES (1, 2); --';
 
       connector.execute('DROP TABLE SQLI_TEST;', function(err) {
         connector.execute('CREATE TABLE SQLI_TEST' +

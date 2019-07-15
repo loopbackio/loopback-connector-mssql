@@ -4,13 +4,13 @@
 // License text available at https://opensource.org/licenses/MIT
 
 'use strict';
-var jdb = require('loopback-datasource-juggler');
-var commonTest = jdb.test;
+const jdb = require('loopback-datasource-juggler');
+const commonTest = jdb.test;
 
 require('./init');
 
 /* global getDataSource */
-var schema = getDataSource();
+const schema = getDataSource();
 
 // run the tests exposed by jugglingdb
 commonTest(module.exports, schema);
@@ -27,7 +27,7 @@ commonTest.it('should automigrate', function(test) {
 });
 
 commonTest.it('should be able to ORDER results', function(test) {
-  var titles = [
+  const titles = [
     {title: 'Title A', subject: 'B'},
     {title: 'Title Z', subject: 'A'},
     {title: 'Title M', subject: 'C'},
@@ -36,7 +36,7 @@ commonTest.it('should be able to ORDER results', function(test) {
     {title: 'Title C', subject: 'D'},
   ];
 
-  var dates = [
+  const dates = [
     new Date(1000 * 5),
     new Date(1000 * 9),
     new Date(1000 * 0),
@@ -48,8 +48,8 @@ commonTest.it('should be able to ORDER results', function(test) {
   titles.forEach(function(t, i) {
     schema.models.Post.create({title: t.title, subject: t.subject, date: dates[i]}, done);
   });
-  var i = 0;
-  var tests = 0;
+  let i = 0;
+  let tests = 0;
   function done(err, obj) {
     if (++i === titles.length) {
       doFilterAndSortTest();
@@ -150,7 +150,7 @@ commonTest.it('should be able to ORDER results', function(test) {
     });
   }
 
-  var fin = 0;
+  let fin = 0;
   function finished() {
     if (++fin === tests) {
       test.done();
@@ -181,7 +181,7 @@ commonTest.it('should delete a post', function(test) {
   }, function(err, posts) {
     test.ifError(err);
     test.equal(posts.length, 1);
-    var id = posts[0].id;
+    const id = posts[0].id;
     posts[0].destroy(function(err) {
       test.ifError(err);
       schema.models.Post.find(id, function(err, post) {
@@ -208,7 +208,7 @@ commonTest.it('should delete all posts', function(test) {
 // custom primary keys not quite working :(, hopefully 1602 will implement that functionality in jugglingdb soon.
 commonTest.it('should support custom primary key', function(test) {
   test.expect(3);
-  var AppliesTo = schema.define('AppliesTo', {
+  const AppliesTo = schema.define('AppliesTo', {
     AppliesToID: {
       type: Number,
       primaryKey: true,
