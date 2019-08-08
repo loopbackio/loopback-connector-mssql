@@ -19,7 +19,7 @@
     "async": "^3.1.0",
     "debug": "^4.1.1",
     "loopback-connector": "^4.8.0",
-    "mssql": "^4.1.0",
+    "mssql": "^5.1.0",
     "strong-globalize": "^5.0.0"
   },
   "bundledDependencies": [
