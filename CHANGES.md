@@ -1,3 +1,19 @@
+2019-09-19, Version 3.4.0
+=========================
+
+ * add juggler-v3 and v4 to dev dependencies (Nora)
+
+ * run shared tests from both v3 and v4 of juggler (Nora)
+
+ * fix eslint violations (Nora)
+
+ * update dependencies (Nora)
+
+ * update CODEOWNERS (Nora)
+
+ * drop support for node.js 6 (Nora)
+
+
 2018-08-07, Version 3.3.0
 =========================
 
