@@ -11,7 +11,7 @@ const fs = require('fs');
 try {
   const index = require.resolve('babel-runtime/regenerator/index.js');
   const runtime = require.resolve(
-    'babel-runtime/regenerator/runtime.js'
+    'babel-runtime/regenerator/runtime.js',
   );
   if (index) {
     fs.unlink(index, function(err) {
