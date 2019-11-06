@@ -172,7 +172,7 @@ describe('mssql connector', function() {
                 if (err) return done(err);
                 data.should.be.eql(
                   [{V1: '(?)',
-                    V2: ', 1 ); INSERT INTO SQLI_TEST VALUES (1, 2); --'}]
+                    V2: ', 1 ); INSERT INTO SQLI_TEST VALUES (1, 2); --'}],
                 );
                 done();
               });
@@ -238,7 +238,7 @@ describe('mssql connector', function() {
           p.should.have.property('rating', 3.5);
           done();
         });
-      }
+      },
     );
   });
 
@@ -291,7 +291,7 @@ describe('mssql connector', function() {
             console.warn.calledOnce.should.be.ok;
             should.exist(err);
             done();
-          }
+          },
         );
       });
     });

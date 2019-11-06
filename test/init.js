@@ -42,6 +42,10 @@ global.getConfig = function(options) {
     }
   }
 
+  if (typeof dbConf.port === 'string') {
+    dbConf.port = parseInt(dbConf.port);
+  }
+
   return dbConf;
 };
 
