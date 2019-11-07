@@ -1,3 +1,11 @@
+2019-11-07, Version 3.5.0
+=========================
+
+ * fix linter errors (Joost de Bruijn)
+
+ * update mssql 5.x and mark sqlcmdjs devDependency (Joost de Bruijn)
+
+
 2019-09-19, Version 3.4.0
 =========================
 
