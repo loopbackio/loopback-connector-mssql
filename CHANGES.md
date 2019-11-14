@@ -1,4 +1,10 @@
-2019-11-07, Version 3.5.0
+2019-11-14, Version 3.6.0
+=========================
+
+ * update mssql to 6.x (Joost de Bruijn)
+
+
+2019-11-06, Version 3.5.0
 =========================
 
  * fix linter errors (Joost de Bruijn)
