@@ -7,12 +7,21 @@
 require('./init');
 
 const should = require('should');
-let Post, PostWithUUID, PostWithStringId, db;
+let User, Post, PostWithUUID, PostWithStringId, db, dbOSF;
 
 describe('mssql connector', function() {
   before(function() {
     /* global getDataSource */
     db = getDataSource();
+    dbOSF = getDataSource({
+      supportsOffSetFetch: true,
+    });
+
+    User = dbOSF.define('User', {
+      id: {type: Number, generated: true, id: true},
+      name: String,
+      age: Number,
+    });
 
     Post = db.define('PostWithBoolean', {
       title: {type: String, length: 255, index: true},
@@ -240,6 +249,28 @@ describe('mssql connector', function() {
         });
       },
     );
+  });
+
+  it('should support limit', function(done) {
+    Post.find({
+      limit: 3,
+    }, (err, result) => {
+      should.not.exist(err);
+      should.exist(result);
+      result.should.have.length(3);
+      done();
+    });
+  });
+
+  it('should support limit with \'supportsOffsetFetch\'', function(done) {
+    User.find({
+      limit: 3,
+    }, (err, result) => {
+      should.not.exist(err);
+      should.exist(result);
+      result.should.have.length(3);
+      done();
+    });
   });
 
   context('regexp operator', function() {
