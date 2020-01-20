@@ -25,8 +25,8 @@ if (!process.env.MSSQL_DATABASE) process.env.MSSQL_DATABASE = global.getConfig()
 
 const catFileCmd = (isWin ? 'type ' : 'cat ') + sqlFileDir;
 
-const sqlcmd = catFileCmd + ' | ' + sqlDependencyDir + ' -s ' + process.env.MSSQL_HOST + ' -o ' + process.env.MSSQL_PORT +
-' -u ' + process.env.MSSQL_USER + ' -p ' + process.env.MSSQL_PASSWORD + ' -d ' + process.env.MSSQL_DATABASE;
+const sqlcmd = `${catFileCmd} | ${sqlDependencyDir} -s ${process.env.MSSQL_HOST} -o ${process.env.MSSQL_PORT} ` +
+  `-u "${process.env.MSSQL_USER}" -p "${process.env.MSSQL_PASSWORD}" -d "${process.env.MSSQL_DATABASE}"`;
 
 exec(sqlcmd, function(err, result) {
   if (err) return console.log('Database seeding failed.\n%s', err);
