@@ -1,6 +1,6 @@
 {
   "name": "loopback-connector-mssql",
-  "version": "3.6.0",
+  "version": "3.7.0",
   "description": "Microsoft SQL Server connector for LoopBack",
   "engines": {
     "node": ">=8"

@@ -1,3 +1,13 @@
+2020-01-22, Version 3.7.0
+=========================
+
+ * add tests for limit&limit with supportsOffsetFetch (Francisco Buceta)
+
+ * add missing 'ORDER BY' before 'OFFSET' (Rifa Achrinza)
+
+ * chore: improve issue and PR templates (Nora)
+
+
 2019-11-14, Version 3.6.0
 =========================
 
