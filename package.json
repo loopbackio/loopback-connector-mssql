@@ -41,6 +41,13 @@
     "test": "mocha test/*.test.js node_modules/juggler-v3/test.js node_modules/juggler-v4/test.js",
     "posttest": "npm run lint"
   },
+  "files": [
+    "intl",
+    "lib",
+    "docs.json",
+    "index.js",
+    "setup.sh"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/strongloop/loopback-connector-mssql.git"
