@@ -22,9 +22,6 @@
     "mssql": "^6.0.0",
     "strong-globalize": "^5.0.0"
   },
-  "bundledDependencies": [
-    "mssql"
-  ],
   "devDependencies": {
     "bluebird": "^3.5.5",
     "eslint": "^6.0.1",
@@ -42,8 +39,7 @@
     "lint": "eslint .",
     "pretest": "node pretest.js",
     "test": "mocha test/*.test.js node_modules/juggler-v3/test.js node_modules/juggler-v4/test.js",
-    "posttest": "npm run lint",
-    "prepublish": "node remove-regenerator.js"
+    "posttest": "npm run lint"
   },
   "repository": {
     "type": "git",
