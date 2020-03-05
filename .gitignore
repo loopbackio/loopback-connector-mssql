@@ -12,7 +12,7 @@ logs
 results
 
 *.sublime*
-node_modules/
+node_modules
 db/
 
 npm-debug.log
