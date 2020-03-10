@@ -1,3 +1,17 @@
+2020-03-10, Version 3.8.0
+=========================
+
+ * Exclude `deps` and `.github` from npm publish (Raymond Feng)
+
+ * Remove obsolete npm script to delete regenerator (Raymond Feng)
+
+ * chore: update CODEOWNERS (Diana Lau)
+
+ * chore: update copyrights year (Diana Lau)
+
+ * fix problem setting passwords with chars like '(' (Francisco Buceta)
+
+
 2020-01-22, Version 3.7.0
 =========================
 
