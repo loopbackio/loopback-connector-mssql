@@ -128,6 +128,61 @@ describe('Manipulating id column', function() {
     });
   });
 
+  it('should create composite key', function(done) {
+    const schema =
+      {
+        name: 'CompositeKeyTest',
+        options: {
+          idInjection: false,
+          mssql: {
+            schema: 'dbo',
+            table: 'COMPOSITE_KEY_TEST',
+          },
+        },
+        properties: {
+          idOne: {
+            type: 'Number',
+            id: true,
+            generated: false,
+          },
+          idTwo: {
+            type: 'Number',
+            id: true,
+            generated: false,
+          },
+          name: {
+            type: 'String',
+            required: false,
+            length: 40,
+          },
+        },
+      };
+
+    const models = ds.modelBuilder.buildModels(schema);
+    const Model = models.CompositeKeyTest;
+    Model.attachTo(ds);
+
+    ds.automigrate(function(err) {
+      assert(!err);
+      async.series([
+        function(callback) {
+          Model.destroyAll(callback);
+        },
+        function(callback) {
+          Model.create({idOne: 1, idTwo: 2, name: 'w1'},
+            callback);
+        },
+        function(callback) {
+          ds.discoverPrimaryKeys('COMPOSITE_KEY_TEST', function(err, models) {
+            if (err) return done(err);
+            assert(models.length === 2);
+            callback();
+          });
+        },
+      ], done);
+    });
+  });
+
   it('should use bigint id', function(done) {
     const schema =
       {
