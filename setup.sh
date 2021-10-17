@@ -50,12 +50,12 @@ printf "\n${CYAN}Clean up complete.${PLAIN}\n"
 
 ## pull latest mssql image
 printf "\n${RED}>> Pulling latest mssql image${PLAIN} ${GREEN}...${PLAIN}"
-docker pull microsoft/mssql-server-linux:latest > /dev/null 2>&1
+docker pull mcr.microsoft.com/mssql/server:2019-latest > /dev/null 2>&1
 printf "\n${CYAN}Image successfully built.${PLAIN}\n"
 
 ## run the mssql container
 printf "\n${RED}>> Starting the mssql container${PLAIN} ${GREEN}...${PLAIN}"
-CONTAINER_STATUS=$(docker run --name $MSSQL_CONTAINER -e ACCEPT_EULA=Y -e SA_PASSWORD=$PASSWORD -p $PORT:1433 -d microsoft/mssql-server-linux:latest 2>&1)
+CONTAINER_STATUS=$(docker run --name $MSSQL_CONTAINER -e ACCEPT_EULA=Y -e SA_PASSWORD=$PASSWORD -p $PORT:1433 -d mcr.microsoft.com/mssql/server:2019-latest 2>&1)
 if [[ "$CONTAINER_STATUS" == *"Error"* ]]; then
     printf "\n\n${CYAN}Status: ${PLAIN}${RED}Error starting container. Terminating setup.${PLAIN}\n\n"
     exit 1
