@@ -17,14 +17,14 @@
   "main": "index.js",
   "dependencies": {
     "async": "^3.1.0",
-    "debug": "^4.1.1",
-    "loopback-connector": "^4.8.0",
-    "mssql": "^6.0.0",
+    "debug": "^4.3.1",
+    "loopback-connector": "^5.0.1",
+    "mssql": "^6.4.0",
     "strong-globalize": "^5.0.0"
   },
   "devDependencies": {
     "bluebird": "^3.5.5",
-    "eslint": "^6.0.1",
+    "eslint": "^7.0.0",
     "eslint-config-loopback": "^13.1.0",
     "juggler-v3": "file:./deps/juggler-v3",
     "juggler-v4": "file:./deps/juggler-v4",
