@@ -23,6 +23,8 @@
     "strong-globalize": "^5.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
     "bluebird": "^3.5.5",
     "eslint": "^7.0.0",
     "eslint-config-loopback": "^13.1.0",
