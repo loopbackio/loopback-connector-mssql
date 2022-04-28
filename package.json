@@ -3,7 +3,7 @@
   "version": "3.8.0",
   "description": "Microsoft SQL Server connector for LoopBack",
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "keywords": [
     "StrongLoop",
